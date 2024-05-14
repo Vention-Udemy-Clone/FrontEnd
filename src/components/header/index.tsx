@@ -1,4 +1,4 @@
-import { IoMdSearch } from 'react-icons/io';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Separator } from '@/components/ui/separator';
 
 export const Header = () => {
@@ -7,7 +7,7 @@ export const Header = () => {
       <span>Logo</span>
 
       <p className="flex items-center ml-auto gap-2">
-        <IoMdSearch fontSize={'25px'} />
+        <MagnifyingGlassIcon className="w-5 h-5" />
         <span>Search</span>
       </p>
 
