@@ -3,7 +3,7 @@
   "tabWidth": 2,
   "useTabs": false,
   "semi": true,
-  "singleQuote": true,
+  "singleQuote": false,
   "quoteProps": "consistent",
   "jsxSingleQuote": false,
   "trailingComma": "es5",
@@ -13,5 +13,6 @@
   "requirePragma": false,
   "insertPragma": false,
   "proseWrap": "preserve",
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
