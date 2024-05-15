@@ -12,4 +12,8 @@ export const queryClient = new QueryClient({
   },
 });
 
-export const QUERY_KEYS = {} as const;
+export const QUERY_KEYS = {
+  qeuey: {
+    listCourses: "listCourses",
+  },
+} as const;
