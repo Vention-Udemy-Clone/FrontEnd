@@ -1,19 +1,15 @@
-
-export interface UserResponse {
-  message: string;
-  data: User;
+export interface LoginResponse {
+  success: boolean;
+  data: Data;
 }
 
-export interface User {
+export interface Data {
+  accessToken: string;
   id: string;
-  firstName: string | null;
-  lastName: string | null;
+}
+
+export interface Login {
   email: string;
-  password: string;
-  role: string;
-  isEmailVerified: boolean;
-  isVerified: boolean;
-  isDeleted: boolean;
-  hashedRefreshToken: string;
-  activationLink: string | null;
+  fullName: string;
+  avatarUrl: string;
 }

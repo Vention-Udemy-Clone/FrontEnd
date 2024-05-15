@@ -1,19 +1,19 @@
 import { Separator } from "@/components/ui/separator";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import GoogleLoginButton from '../googleAuth';
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import GoogleLoginButton from "../googleAuth";
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 left-0 w-full flex items-center px-16 py-4">
+    <header className="sticky left-0 top-0 flex w-full items-center px-16 py-4">
       <span>Logo</span>
 
-      <p className="flex items-center ml-auto gap-2">
-        <MagnifyingGlassIcon className="w-5 h-5" />
+      <p className="ml-auto flex items-center gap-2">
+        <MagnifyingGlassIcon className="h-5 w-5" />
         <span>Search</span>
       </p>
 
-      <Separator orientation="vertical" className="h-6 mx-6" />
+      <Separator orientation="vertical" className="mx-6 h-6" />
 
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID as string}>
         <GoogleLoginButton />

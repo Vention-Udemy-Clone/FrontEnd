@@ -1,12 +1,14 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ExitIcon, HamburgerMenuIcon } from '@radix-ui/react-icons';
-import { useGoogleLogin } from '@react-oauth/google';
-import { useState } from 'react';
-import { toast } from 'sonner';
-import { Button } from '../ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ExitIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Button } from "../ui/button";
 
-import { setValueToLocalStorage } from '@/lib/utils';
-import useUserStore from '@/zustand/userStore';
+import useSignInMutation from "@/mutations/useSignInMutation";
+import useGetUserQuery from "@/queries/useGetUserQuery";
+import { Login } from "@/types/user.types";
+import useUserStore from "@/zustand/userStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,49 +17,56 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
+} from "../ui/dropdown-menu";
 
 function GoogleLoginButton() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isLogined, setIsLogined] = useState(false);
-  const setUser = useUserStore((state) => state.setUser);
+
+  const { data } = useGetUserQuery();
+
+  console.log("file: index.tsx:29 ~ GoogleLoginButton ~ data:", data);
 
   const user = useUserStore((state) => state.user);
 
+  const { mutate, isPending } = useSignInMutation();
+
+  console.log("file: index.tsx:29 ~ GoogleLoginButton ~ isPending:", isPending);
+
   // Access user data from the store
-  console.log('User Info:', user);
+  console.log("User Info:", user);
 
   const login = useGoogleLogin({
     onSuccess: async (response) => {
       setIsLoading(false);
-      console.log('Logged in successfully:', response);
+      console.log("Logged in successfully:", response);
       try {
-        const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+        const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
           headers: {
             Authorization: `Bearer ${response.access_token}`,
           },
         });
         const userInfo = await res.json();
 
-        console.log('User Info:', userInfo);
-        console.log(userInfo.given_name);
-        console.log(userInfo.email);
-        console.log(true);
-        setIsLogined(true);
-        toast.success('Logged in successfully', {});
-        const userData: any = { name: userInfo.given_name, email: userInfo.email };
-        setUser(userData);
-        setValueToLocalStorage(userData);
+        console.log("User Info:", userInfo);
+        toast.success("Logged in successfully", {});
+        const userData: Login = {
+          fullName: userInfo.given_name + " " + userInfo.family_name,
+          email: userInfo.email,
+          avatarUrl: userInfo.picture,
+        };
 
-      
+        console.log("file: index.tsx:58 ~ onSuccess: ~ userData:", userData);
+
+        mutate(userData);
+
       } catch (error) {
-        toast.error('Login failed', {});
+        toast.error("Login failed", {});
       }
     },
     onError: (error) => {
       setIsLoading(false);
-      console.error('Login error:', error);
-      toast.error('Login failed', {});
+      console.error("Login error:", error);
+      toast.error("Login failed", {});
     },
     onNonOAuthError: () => {
       setIsLoading(false);
@@ -70,21 +79,21 @@ function GoogleLoginButton() {
   };
 
   const handleLogOut = () => {
-    setIsLogined(false);
-    toast.success('Logged out successfully');
+    toast.success("Logged out successfully");
   };
+
   return (
     <div>
-      {isLogined ? (
+      {data?.id ? (
         <>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className='rounded-3xl pl-1 pr-3' variant={"outline"}>
-                <Avatar className="w-7 h-7 mr-2  ">
+              <Button className="rounded-3xl pl-1 pr-3" variant={"outline"}>
+                <Avatar className="mr-2 h-7 w-7  ">
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>NS</AvatarFallback>
                 </Avatar>
-              <HamburgerMenuIcon className="w-5 h-5 text-gray-600" />
+                <HamburgerMenuIcon className="h-5 w-5 text-gray-600" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
@@ -111,7 +120,7 @@ function GoogleLoginButton() {
 
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogOut}>
-                <ExitIcon className="w-5 h-5 mr-2" />
+                <ExitIcon className="mr-2 h-5 w-5" />
                 <span>Log out</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -121,10 +130,10 @@ function GoogleLoginButton() {
         <Button
           className=" :hover:bg-white-500 rounded-sm"
           onClick={handleGoogleLogin}
-          variant={'default'}
+          variant={"default"}
           disabled={isLoading}
         >
-          <div className="flex items-center gap-2 justify-center ">
+          <div className="flex items-center justify-center gap-2 ">
             {/* <svg
               className="w-6 h-6 text-gray-800 dark:text-white"
               aria-hidden="true"
@@ -140,7 +149,7 @@ function GoogleLoginButton() {
                 clipRule="evenodd"
               />
             </svg> */}
-            <div >{isLoading ? 'Loading...' : 'Log In'}</div>
+            <div>{isLoading ? "Loading..." : "Log In"}</div>
           </div>
         </Button>
       )}

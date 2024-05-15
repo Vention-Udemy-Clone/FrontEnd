@@ -1,8 +1,9 @@
-import create from 'zustand';
+import create from "zustand";
 
 interface User {
-  name: string;
+  fullName: string;
   email: string;
+  avatarUrl: string;
 }
 
 interface UserState {

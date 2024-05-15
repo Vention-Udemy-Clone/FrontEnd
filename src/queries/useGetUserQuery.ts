@@ -1,24 +1,21 @@
-// import request from '@/lib/request';
-// import useUserStore from '@/zustand/userStore';
-// import { useQuery } from '@tanstack/react-query';
-// import { QUERY_KEYS } from './react-query.config';
+import { ENDPOINTS } from "@/config/enpoints.config";
+import { LOCAL_STORAGE_KEYS } from "@/config/local-storage.config";
+import { QUERY_KEYS } from "@/config/react-query.config";
+import request from "@/lib/request";
+import { getValueFromLocalStorage } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
 
-// function useGetUserQuery() {
+function useGetUserQuery() {
+  const userId = getValueFromLocalStorage<string>(LOCAL_STORAGE_KEYS.sub);
 
-//   const setUser = useUserStore((state) => state.setUser);
+  return useQuery({
+    queryKey: [QUERY_KEYS.query.user],
+    queryFn: async () => {
+      const { data } = await request.get<any>(ENDPOINTS.user.user(userId));
+      return data.data;
+    },
+    enabled: !!userId,
+  });
+}
 
-//   const userId = getValueFromLocalStorage<string>(LOCAL_STORAGE_KEYS.sub);
-
-//   return useQuery({
-//     queryKey: [QUERY_KEYS.query.user],
-//     queryFn: async () => {
-//       const { data } = await request.post<any>(`users/${userId}`);
-//       setUser(userData);
-
-//       return data.data;
-//     },
-//     enabled: !!userId,
-//   });
-// }
-
-// export default useGetUserQuery;
+export default useGetUserQuery;
