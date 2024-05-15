@@ -1,1 +1,5 @@
-export const ENDPOINTS = {} as const;
+export const ENDPOINTS = {
+  course: {
+    listCourses: "/courses",
+  },
+} as const;
