@@ -1,5 +1,7 @@
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Separator } from "@/components/ui/separator";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import GoogleLoginButton from '../googleAuth';
 
 export const Header = () => {
   return (
@@ -13,7 +15,9 @@ export const Header = () => {
 
       <Separator orientation="vertical" className="h-6 mx-6" />
 
-      <p>Log In</p>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID as string}>
+        <GoogleLoginButton />
+      </GoogleOAuthProvider>
     </header>
   );
 };
