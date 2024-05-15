@@ -1,5 +1,5 @@
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { Separator } from '@/components/ui/separator';
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { Separator } from "@/components/ui/separator";
 
 export const Header = () => {
   return (
