@@ -5,7 +5,7 @@ import GoogleLoginButton from "../googleAuth";
 
 export const Header = () => {
   return (
-    <header className="sticky left-0 top-0 flex w-full items-center px-16 py-4">
+    <header className="sticky left-0 top-0 z-50 flex w-full items-center border-b border-gray-200 bg-white px-16 py-4">
       <span>Logo</span>
 
       <p className="ml-auto flex items-center gap-2">

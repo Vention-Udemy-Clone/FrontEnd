@@ -5,4 +5,7 @@ export const ENDPOINTS = {
   user: {
     user: (userId: string | null) => `user/${userId}`,
   },
+  course: {
+    listCourses: "/courses",
+  },
 } as const;
