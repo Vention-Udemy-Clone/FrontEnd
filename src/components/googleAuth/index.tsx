@@ -81,14 +81,14 @@ function GoogleLoginButton() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
-                className="rounded-3xl pl-1 pr-3 hover:border-primary active:border-primary"
+                className="rounded-3xl  pl-1 pr-3 hover:border-primary active:border-primary"
                 variant={"outline"}
               >
                 <Avatar className="mr-2 h-7 w-7  ">
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>NS</AvatarFallback>
                 </Avatar>
-                <HamburgerMenuIcon className="h-5 w-5 text-gray-600" />
+                <HamburgerMenuIcon className="h-5 w-5  text-primary" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
