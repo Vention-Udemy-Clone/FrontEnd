@@ -1,5 +1,6 @@
-// import { toast } from "@/components/ui/use-toast";
 import axios from "axios";
+import { getValueFromLocalStorage } from "./utils";
+import { LOCAL_STORAGE_KEYS } from "@/config/local-storage.config";
 
 export const request = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -8,7 +9,9 @@ export const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
-    // Set the Authorization header for every request
+    const token = getValueFromLocalStorage<string>(LOCAL_STORAGE_KEYS.accessToken);
+
+    if (token) config.headers["Authorization"] = `Bearer ${token}`;
     return config;
   },
   (error) => {
