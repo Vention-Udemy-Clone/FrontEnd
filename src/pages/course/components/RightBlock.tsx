@@ -183,29 +183,7 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
             </div>
           </TabsContent>
         </Tabs>
-        {/* 
-        <Tabs
-          defaultValue="account"
-          className="relative w-full rounded-2xl border-2 border-t-0 after:absolute after:top-[48px] after:h-full after:w-full after:rounded-xl after:border-2 after:border-[#4D566F] after:bg-purple-300/10 after:content-['']"
-        >
-          <TabsList className="  relative flex w-full justify-between rounded-2xl bg-background p-0 ">
-            <TabsTrigger
-              className=" relative ml-[-2px] mt-[-4px] rounded-2xl rounded-b-none p-0 px-2 text-2xl data-[state=active]:border-2 data-[state=active]:border-b-0  data-[state=active]:text-violet-400 data-[state=active]:before:absolute data-[state=active]:before:left-[132px] data-[state=active]:before:top-3 data-[state=active]:before:h-full data-[state=active]:before:w-[180px] data-[state=active]:before:rounded-b-xl data-[state=active]:before:rounded-br-none data-[state=active]:before:border-2 data-[state=active]:before:border-r-0 data-[state=active]:before:border-t-0 data-[state=active]:before:border-[#4D566F] data-[state=active]:before:bg-red-300/20 data-[state=active]:before:content-[''] data-[state=active]:after:absolute data-[state=active]:after:left-[155px] data-[state=active]:after:top-[47px] data-[state=active]:after:h-full data-[state=active]:after:w-[180px] data-[state=active]:after:rounded-t-xl data-[state=active]:after:rounded-tl-none data-[state=active]:after:border-2 data-[state=active]:after:border-b-0 data-[state=active]:after:border-l-0 data-[state=active]:after:border-[#4D566F] data-[state=active]:after:bg-red-300/20 data-[state=active]:after:content-[''] "
-              value="account"
-            >
-              Overview
-            </TabsTrigger>
-            <TabsTrigger
-              className="relative mr-[-2px] mt-[-4px] rounded-2xl rounded-b-none border-b-0 p-0 px-2 text-2xl data-[state=active]:border-2  data-[state=active]:text-violet-400 data-[state=active]:before:absolute data-[state=active]:before:left-[132px] data-[state=active]:before:top-3 data-[state=active]:before:h-full data-[state=active]:before:w-[180px] data-[state=active]:before:rounded-b-xl data-[state=active]:before:rounded-br-none data-[state=active]:before:border-2 data-[state=active]:before:border-r-0 data-[state=active]:before:border-t-0 data-[state=active]:before:border-[#4D566F] data-[state=active]:before:bg-red-300/20 data-[state=active]:before:content-[''] data-[state=active]:after:absolute data-[state=active]:after:left-[155px] data-[state=active]:after:top-[47px] data-[state=active]:after:h-full data-[state=active]:after:w-[180px] data-[state=active]:after:rounded-t-xl data-[state=active]:after:rounded-tl-none data-[state=active]:after:border-2 data-[state=active]:after:border-b-0 data-[state=active]:after:border-l-0 data-[state=active]:after:border-[#4D566F] data-[state=active]:after:bg-red-300/20 data-[state=active]:after:content-[''] "
-              value="password"
-            >
-              Password
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="account">Make changes to your account here.</TabsContent>
-          <TabsContent value="password">Change your password here.</TabsContent>
-        </Tabs> */}
       </div>
     </div>
-  ); // Right block with red background
+  );
 };
