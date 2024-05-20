@@ -11,6 +11,7 @@ import useSignInMutation from "@/mutations/useSignInMutation";
 import useGetUserQuery from "@/queries/useGetUserQuery";
 import useUserStore from "@/store/userStore";
 import { Login } from "@/types/user.types";
+import { ModeToggle } from "../ModeToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -92,7 +93,12 @@ function GoogleLoginButton() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>
+                <div className="flex items-center justify-between">
+                  <p>My Account</p>
+                  <ModeToggle styles="block sm:hidden" />
+                </div>
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem>

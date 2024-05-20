@@ -10,8 +10,6 @@ function useGetCourseQuery(courseId: string) {
     queryFn: async () => {
       const { data } = await request.get<CourseResponse>(ENDPOINTS.course.getOneCourse(courseId));
 
-      console.log("file: useGetCourseQuery.ts:13 ~ queryFn: ~ data:", data);
-
       return data.data;
     },
     enabled: !!courseId,

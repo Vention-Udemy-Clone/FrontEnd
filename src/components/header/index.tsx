@@ -18,7 +18,7 @@ export const Header = () => {
 
           <Separator orientation="vertical" className="mx-2 h-6" />
 
-          <ModeToggle />
+          <ModeToggle styles="hidden sm:block" />
           <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID as string}>
             <GoogleLoginButton />
           </GoogleOAuthProvider>
