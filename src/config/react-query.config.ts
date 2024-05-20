@@ -15,6 +15,8 @@ export const queryClient = new QueryClient({
 export const QUERY_KEYS = {
   query: {
     user: "user",
+    course: "course",
+    lesson: "lesson",
     listCourses: "listCourses",
   },
 } as const;
