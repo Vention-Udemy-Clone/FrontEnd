@@ -23,7 +23,7 @@ export const CoursePage = () => {
     moduleNum: "",
     lessonNum: "",
   });
-  const [searchParams, setSearchParams] = useSearchParams({ showPanels: "false" });
+  const [searchParams, setSearchParams] = useSearchParams({ showPanels: "true" });
 
   const searchParamsAsObject = useMemo(() => {
     const values: Record<string, string> = {};
