@@ -33,7 +33,7 @@ export const CourseCard = ({ course, noHover }: Props) => {
 
       <div className="flex flex-grow flex-col p-4">
         <div className="flex gap-4">
-          <h4 className="mr-auto line-clamp-1 text-lg  font-semibold">{title}</h4>
+          <h4 className="mr-auto line-clamp-2 text-lg  font-semibold">{title}</h4>
           <BookmarkIcon className="h-5 w-5 text-gray-300" />
         </div>
 
