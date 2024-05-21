@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export enum Level {
   BEGINNER = "BEGINNER",
   INTERMEDIATE = "INTERMEDIATE",
@@ -9,6 +11,16 @@ export enum Status {
   PUBLISHED = "PUBLISHED",
   ARCHIVED = "ARCHIVED",
 }
+
+export const courseSchema = z.object({
+  title: z.string().min(3, "Must be at least 3 characters"),
+  description: z.string().min(10, "Must be at least 10 characters"),
+  level: z.nativeEnum(Level).default(Level.BEGINNER),
+  status: z.nativeEnum(Status).default(Status.DRAFT),
+  authorId: z.string(),
+});
+
+export type CourseRequest = z.infer<typeof courseSchema>;
 
 export type Course = {
   id: string;
@@ -22,13 +34,29 @@ export type Course = {
   author: {
     id: string;
     fullName: string;
+    avatarUrl: string;
     email: string;
   };
+  Module: {
+    id: string;
+    title: string;
+    Lesson: {
+      id: string;
+      title: string;
+    }[];
+  }[];
 };
 
 export type CoursesResponse = {
-  data: Course[];
   count: number;
+  data: Course[];
+};
+
+export type CreateCourseResponse = {
+  success: boolean;
+  data: {
+    id: string;
+  };
 };
 
 export type Lesson = {
@@ -57,8 +85,8 @@ export type CourseData = {
   createdAt: string;
   description: string;
   id: string;
-  level: string;
-  status: string;
+  level: Level;
+  status: Status;
   title: string;
   updatedAt: string;
 };
