@@ -1,6 +1,6 @@
 import { Toaster } from "sonner";
+import { ThemeProvider } from "./components/ThemeProvider";
 import { AppRoutes as Routes } from "./routes";
-import { ThemeProvider } from "./theme-provider";
 
 const App = () => {
   return (

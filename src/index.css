@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,17 +31,17 @@
   .dark {
     --background: 224, 18%, 12%;
     --foreground: 60 9.1% 97.8%;
-    --card: 20 14.3% 4.1%;
+    --card: 224, 18%, 12%;
     --card-foreground: 60 9.1% 97.8%;
-    --popover: 20 14.3% 4.1%;
+    --popover: 224, 18%, 12%;
     --popover-foreground: 60 9.1% 97.8%;
     --primary: 11 100% 62%;
     --primary-foreground: 60 9.1% 97.8%;
-    --secondary: 12 6.5% 15.1%;
+    --secondary: 224, 18%, 37%;
     --secondary-foreground: 60 9.1% 97.8%;
-    --muted: 12 6.5% 15.1%;
+    --muted: 224, 18%, 37%;
     --muted-foreground: 24 5.4% 63.9%;
-    --accent: 12 6.5% 15.1%;
+    --accent: 224, 18%, 37%;
     --accent-foreground: 60 9.1% 97.8%;
     --destructive: 0 72.2% 50.6%;
     --destructive-foreground: 60 9.1% 97.8%;
@@ -55,5 +57,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "JetBrains Mono", monospace;
   }
 }

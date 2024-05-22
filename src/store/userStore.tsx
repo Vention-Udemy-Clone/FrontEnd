@@ -1,30 +1,33 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-interface User {
+type User = {
   id: string;
-  fullName: string;
   email: string;
+  fullName: string;
   avatarUrl: string;
-}
+};
 
-interface UserState {
-  user: User | null;
-  setUser: (userData: User) => void;
-  removeUser: () => void;
-}
+const initialState = {
+  user: {
+    id: "",
+    email: "",
+    fullName: "",
+    avatarUrl: "",
+  } as User,
+};
 
-const useUserStore = create<UserState>()(
+export const useUserStore = create<typeof initialState>()(
   devtools(
-    persist(
-      (set) => ({
-        user: null,
-        setUser: (userData) => set({ user: userData }),
-        removeUser: () => set({ user: null }),
-      }),
-      { name: "userStore" }
-    )
+    persist(() => initialState, { name: "userStore" }),
+    { name: "userStore" }
   )
 );
 
-export default useUserStore;
+export const setUser = (userData: User) => {
+  useUserStore.setState({ user: userData });
+};
+
+export const removeUser = () => {
+  useUserStore.setState({ user: initialState.user });
+};
