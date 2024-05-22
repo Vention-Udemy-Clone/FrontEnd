@@ -103,7 +103,7 @@ export const CoursePage = () => {
               setActiveLessonAndModule={setActiveLessonAndModule}
               modules={data.Module}
               courseId={courseId as string}
-              styles={"w-4/12 max-w-[360px] max-[1100px]:hidden"}
+              styles={"w-4/12 xl:w-3/12 max-w-[360px] max-[1100px]:hidden"}
               setLeftBlockOpen={setOpen}
             />
             <Drawer
@@ -149,7 +149,7 @@ export const CoursePage = () => {
         <MiddleBlock activeLessonAndModule={activeLessonAndModule} />
         {showPanels && (
           <>
-            <RightBlock styles={" w-4/12 max-w-[380px] max-[1400px]:hidden "} course={data} />
+            <RightBlock styles={" w-3/12 max-w-[380px] max-[1400px]:hidden "} course={data} />
             <Drawer handleOnly={true} disablePreventScroll={true} direction="right">
               <DrawerTrigger className="hidden max-[1400px]:block">
                 <div className="fixed right-[12px] top-16 z-50 w-[19px] rounded-s-lg border-2 border-r-0 p-1 before:absolute before:bottom-full before:left-[17px] before:h-full before:w-[15px] before:rounded-br-full before:border-2 before:border-l-0 before:border-t-0  before:border-border before:content-[''] after:absolute after:left-[17px] after:top-full after:h-full after:w-[15px] after:rounded-tr-full after:border-2 after:border-b-0 after:border-l-0 after:border-border  after:content-['']  ">
