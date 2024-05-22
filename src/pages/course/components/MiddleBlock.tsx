@@ -1,5 +1,13 @@
 import useGetLessonQuery from "@/queries/course/useGetLessonQuery";
+// import axios from "axios";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import LessonQuizModal from "./LessonQuizModal";
+
+export interface QuizData {
+  question: string;
+  answer: string;
+}
 
 export const MiddleBlock = ({
   activeLessonAndModule: { moduleNum, lessonNum },
@@ -8,10 +16,37 @@ export const MiddleBlock = ({
 }) => {
   const { lessonId } = useParams();
 
+  const [quizData, setQuizData] = useState(null as QuizData[] | null);
+
   const { isPending, data: lesson, isError } = useGetLessonQuery(lessonId as string);
 
   if (isPending) return <div className=" min-w-[500px]">Loading...</div>;
   if (isError) return <div className=" min-w-[500px]">Error...</div>;
+
+  const fetchQuizData = async () => {
+    // const response = await axios.get('your-backend-url');
+    const response = {
+      data: [
+        {
+          question: 'What is the capital of France?',
+          answer: 'Paris',
+        },
+        {
+          question: 'What is the capital of Spain?',
+          answer: 'Madrid',
+        },
+        {
+          question: 'What is the capital of Italy?',
+          answer: 'Rome',
+        }
+      ],
+    };
+    setQuizData(response.data);
+  };
+
+  useEffect(() => {
+    fetchQuizData();
+  }, []);
 
   return (
     <div className="relative w-4/12  grow items-center justify-center ">
@@ -38,6 +73,9 @@ export const MiddleBlock = ({
           </div>
         </div>
       </div>
+      <LessonQuizModal
+        quizData={quizData}
+      />
     </div>
   );
 };
