@@ -18,5 +18,6 @@ export const QUERY_KEYS = {
     course: "course",
     lesson: "lesson",
     listCourses: "listCourses",
+    quiz: "quiz",
   },
 } as const;

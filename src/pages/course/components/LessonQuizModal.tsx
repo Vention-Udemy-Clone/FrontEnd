@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -9,48 +8,74 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { QuizData } from "./MiddleBlock";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { QuizData } from "@/types/lesons.types";
+import useRegenerateQuizMutation from "@/mutations/useGetQuizMutation";
+import { useEffect, useState } from "react";
+import useGetQuizQuery from "@/queries/course/useGetQuizQuery";
 
 export interface QuizProps {
-  quizData: QuizData[] | null;
+  lessonId: string;
 }
 
-const LessonQuizModal = (props: QuizProps) => {
-  
-  // const [expandAnswer, setExpandAnswer] = useState(null as number | null);
-  const { quizData } = props;
+const LessonQuizModal = (
+  props: QuizProps
+) => {
+  const { lessonId } = props;
+  const { data, isPending, isError } = useGetQuizQuery(lessonId as string);
+  const [quizData, setQuizData] = useState<QuizData[] | undefined>(undefined);
+  const [isQuizLoading, setIsQuizLoading] = useState<boolean | undefined>(undefined);
+  const [isQuizError, setIsQuizError] = useState<boolean | undefined>(undefined);
+
+  useEffect(() => { 
+    setQuizData(data);
+    setIsQuizLoading(isPending);
+    setIsQuizError(isError);
+  }, [data, isPending, isError])
+
+  const regenerateQuizMutation = useRegenerateQuizMutation(lessonId);
+
+  const handleRegenerateQuiz = async () => {
+    try {
+      setQuizData(undefined);
+      setIsQuizError(false);
+      setIsQuizLoading(true);
+      const newQuizData = await regenerateQuizMutation.mutateAsync();
+      setQuizData(newQuizData);
+      setIsQuizLoading(false);
+    } catch (error) {
+      setIsQuizLoading(false);
+      setIsQuizError(true);
+      console.error(error);
+    }
+  }
 
   return (
-    // <>
-    //     {quizData && quizData.map((question, index) => (
-    //       <div key={index}>
-    //         <h2>{question.question}</h2>
-    //         <button onClick={() => setExpandAnswer(index)}>
-    //           {expandAnswer === index ? 'Hide Answer' : 'Show Answer'}
-    //         </button>
-    //         {expandAnswer === index && <p>{question.answer}</p>}
-    //       </div>
-    //     ))}
-    //     <button>Close</button>
-    // </>
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Self-Quiz</Button>
+          <div className="flex justify-end">
+          <Button
+            className="rounded-sm"
+            variant={"default"}>
+            Generate a Self-Quiz with AI
+          </Button>
+        </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[625px]">
         <DialogHeader>
-          <DialogTitle>Self-Quiz</DialogTitle>
+          <DialogTitle>Generate a Self-Quiz with AI</DialogTitle>
           <DialogDescription>
             Try to answer the following questions to test your knowledge. Answers are hidden by default. Click on the question to reveal the answer.
           </DialogDescription>
         </DialogHeader>
         <Accordion type="single" collapsible className="w-full">
+          {isQuizLoading && <span className=" min-w-[500px]">AI is generating quiz...</span>}
+          {isQuizError && <span className=" min-w-[500px]">Error generating quiz. Please try again</span>}
           {quizData && quizData.map((question, index) => (
           <AccordionItem key={index} value={`item-${index}`}>
               <AccordionTrigger key={index}>{question.question}</AccordionTrigger>
@@ -59,11 +84,7 @@ const LessonQuizModal = (props: QuizProps) => {
           ))}
         </Accordion>
         <DialogFooter>
-        <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
+          <Button onClick={handleRegenerateQuiz}>Regenerate quiz</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

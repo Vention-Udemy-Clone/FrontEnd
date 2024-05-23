@@ -11,5 +11,6 @@ export const ENDPOINTS = {
   },
   lesson: {
     getOneLesson: (lessonId: string) => `/lessons/${lessonId}`,
+    getQuiz: (lessonId: string) => `/quiz/${lessonId}`,
   },
 } as const;
