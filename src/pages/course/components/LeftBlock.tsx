@@ -80,7 +80,7 @@ export const LeftBlock = ({
   };
 
   return (
-    <div className={`${styles} pr-7`}>
+    <div className={`${styles} pr-4`}>
       {modules.map((module, i) => (
         <Accordion
           key={module.id}
@@ -98,7 +98,7 @@ export const LeftBlock = ({
 
                 <div className="text-left">
                   <p className="text-xs text-gray-500"> Module {i}</p>
-                  <p className="line-clamp-2 font-semibold">{module.title}</p>
+                  <p className="line-clamp-2 text-xs font-medium">{module.title}</p>
                 </div>
               </div>
             </AccordionTrigger>
@@ -125,7 +125,7 @@ export const LeftBlock = ({
                             });
                             setLeftBlockOpen(false);
                           }}
-                          className={`${selectedLesson === lesson.id ? "text-primary " : ""} line-clamp-2 text-left font-semibold hover:text-primary`}
+                          className={`${selectedLesson === lesson.id ? "text-primary " : ""} line-clamp-2 text-left text-xs font-medium hover:text-primary`}
                         >
                           {lesson.title}
                         </p>

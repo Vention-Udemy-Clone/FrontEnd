@@ -20,6 +20,10 @@ export const useUpdateCourse = () => {
       await queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.query.courses.mycourse, res.data.data.id],
       });
+      await queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.query.listCourses] });
+      await queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.query.course, res.data.data.id],
+      });
     },
   });
 

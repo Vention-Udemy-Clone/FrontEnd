@@ -24,42 +24,42 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
     setTab(value);
   };
   return (
-    <div className={`pl-3 sm:pl-7 ${styles}`}>
+    <div className={`pl-3 sm:pl-4 ${styles}`}>
       <div className="mb-3 flex w-full flex-col gap-2 rounded-xl border-2 p-2 text-sm sm:mb-6 sm:rounded-2xl sm:p-4 sm:text-base">
-        <div className="flex justify-between">
+        <div className="flex justify-between text-sm">
           <div className="flex items-center justify-between gap-3">
             <BookCheck strokeWidth={1.75} />
-            <div className="font-semibold">Lecture Type</div>
+            <div className="font-medium ">Lecture Type</div>
           </div>
           <p className="font-thin capitalize">Pre-recorded</p>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between text-sm ">
           <div className="flex items-center justify-between gap-3">
             <BarChart3 strokeWidth={1.75} />
-            <div className="font-semibold">Course level</div>
+            <div className="font-medium">Course level</div>
           </div>
           <p className=" font-thin capitalize	">{course.level.toLowerCase()}</p>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between text-sm">
           <div className="flex items-center justify-between gap-3">
             <Component strokeWidth={1.75} />
-            <div className="font-semibold">Modules</div>
+            <div className="font-medium">Modules</div>
           </div>
           <p className="font-thin capitalize">{course.Module.length}</p>
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between text-sm">
           <div className="flex items-center justify-between gap-3">
             {/* <BookText /> */}
             <LibraryBig strokeWidth={1.75} />
-            <div className="font-semibold">Lessons</div>
+            <div className="font-medium">Lessons</div>
           </div>
           <p className="font-thin capitalize">{course.Module.length}</p>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between text-sm">
           <div className="flex items-center justify-between gap-3">
             <History strokeWidth={1.75} />
-            <div className="font-semibold">Last update</div>
+            <div className="font-medium">Last update</div>
           </div>
           <p className="font-thin capitalize">
             {new Date(course.updatedAt).toLocaleString("default", {
@@ -104,26 +104,22 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
                   </p>
                 </div>
               </div>
-              <p className="mb-2 text-2xl font-semibold">{course.title}</p>
-              <p className="mb-4 text-sm text-muted-foreground">{course.description}</p>
+              <p className="mb-2 text-lg font-semibold">{course.title}</p>
+              <p className="mb-4 whitespace-pre-wrap text-sm text-muted-foreground">
+                {course.description}
+              </p>
               <div>
-                <p className="mb-4 font-semibold">This course will have these modules: </p>
+                <p className="mb-4 text-sm font-semibold">This course will have these modules: </p>
                 <ul>
                   {course.Module.map((module, i) => (
                     <li key={module.id} className="mb-5 flex items-center">
                       <div className="relative z-10 mr-3 flex h-5 w-5 shrink-0 items-center justify-center rounded-sm border-2 border-foreground bg-foreground/70 text-base font-bold  text-primary before:absolute before:left-[-5px] before:top-[5px] before:z-[-1] before:h-5 before:w-5 before:rounded-sm before:bg-foreground/70 before:shadow-sm before:shadow-foreground before:content-['']">
                         {i + 1}
                       </div>
-                      {/* <p className="line-clamp-2 ">{module.title}</p> */}
                       <TooltipProvider delayDuration={200}>
                         <Tooltip>
                           <TooltipTrigger>
-                            <p
-                              // onClick={() => {
-                              //   handleLessonSelect(module.id, lesson.id);
-                              // }}
-                              className="line-clamp-2 text-left font-semibold text-muted-foreground hover:text-primary"
-                            >
+                            <p className="line-clamp-2 text-left text-sm font-semibold text-muted-foreground hover:text-primary">
                               {module.title}
                             </p>
                           </TooltipTrigger>
@@ -138,7 +134,7 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
               </div>
             </div>
           </TabsContent>
-          <TabsContent value="tutors" className="px-2 py-3">
+          <TabsContent value="tutors" className="py-3">
             <div>
               <div className="mb-3 items-start gap-2">
                 <div className="mb-1 flex items-center overflow-hidden">
@@ -153,7 +149,7 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
                   src={course.author.avatarUrl || "https://picsum.photos/200"}
                   alt="author image"
                 />
-                <div className="flex grow flex-col gap-2">
+                <div className="flex grow flex-col gap-2 text-sm">
                   <div className="flex gap-2 transition-all">
                     <Star strokeWidth={1.5} className="text-primary" />{" "}
                     <p className="font-semibold">{(Math.random() * 1.5 + 3.5).toFixed(1) + " "}</p>

@@ -95,3 +95,16 @@ export type CourseResponse = {
   success: boolean;
   data: CourseData;
 };
+
+export type GenerateCourseDescriptionRequest = {
+  title: string;
+  level: Level;
+  words: number;
+};
+
+export type GenerateCourseDescriptionResponse = {
+  success: boolean;
+  data: {
+    description: string;
+  };
+};
