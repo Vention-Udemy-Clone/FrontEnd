@@ -10,10 +10,12 @@ export const ENDPOINTS = {
     listCourses: "/courses",
     getOneCourse: (courseId: string) => `/courses/${courseId}`,
     myCourses: (authorId: string) => `/courses/my-courses/${authorId}`,
+    generateDescription: "/courses/generate-description",
   },
   lesson: {
     root: "/lessons",
     getOneLesson: (lessonId: string) => `/lessons/${lessonId}`,
+    generateTexts: "/lessons/generate-texts",
     getQuiz: (lessonId: string) => `/quiz/${lessonId}`,
   },
   module: {

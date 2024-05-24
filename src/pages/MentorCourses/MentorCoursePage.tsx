@@ -98,14 +98,8 @@ export const MentorCoursePage = () => {
                         className="rounded-md border"
                       >
                         <div className="flex items-center justify-between p-1">
-                          <AccordionTrigger
-                            noIcon
-                            className="px-2 py-0 text-start  hover:no-underline"
-                          >
-                            {content.title} {`(${content.lessons.length})`}
-                          </AccordionTrigger>
                           <DropdownMenu>
-                            <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md border hover:bg-accent">
+                            <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md  hover:bg-accent">
                               <DotsHorizontalIcon />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
@@ -117,6 +111,9 @@ export const MentorCoursePage = () => {
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
+                          <AccordionTrigger className="px-2 py-0 text-start  hover:no-underline">
+                            {content.title} {`[${content.lessons.length}]`}
+                          </AccordionTrigger>
                         </div>
                         <AccordionContent className="px-3">
                           <div className="flex">

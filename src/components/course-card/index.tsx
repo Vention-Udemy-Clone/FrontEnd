@@ -37,7 +37,9 @@ export const CourseCard = ({ course, noHover }: Props) => {
           <BookmarkIcon className="h-5 w-5 text-gray-300" />
         </div>
 
-        <p className="mb-10 mt-3 line-clamp-3 flex-grow text-sm text-gray-600">{description}</p>
+        <p className="mb-10 mt-3 line-clamp-3 flex-grow break-all text-sm text-gray-600">
+          {description}
+        </p>
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">

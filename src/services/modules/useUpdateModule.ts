@@ -19,6 +19,9 @@ export const useUpdateModule = () => {
       await queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.query.courses.mycourse, id],
       });
+      await queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.query.course, id],
+      });
     },
   });
 

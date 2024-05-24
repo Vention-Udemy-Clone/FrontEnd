@@ -20,17 +20,26 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import useGenerateCourseDescription from "@/mutations/useGenerateCourseDescription";
 import { useCreateCourse, useUpdateCourse } from "@/services/courses";
 import { CourseRequest } from "@/types/course.types";
+import { useState } from "react";
+import { toast } from "sonner";
+import { InputForm } from "./InputForm";
 
 type Props = {
   form: UseFormReturn<CourseRequest>;
 };
 
 export const CourseForm = ({ form }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAiGenerationOpen, setIsAiGenerationOpen] = useState(false);
+
   const { id } = useParams<{ id: string }>();
   const { createCourse, status } = useCreateCourse();
   const { updateCourse } = useUpdateCourse();
+
+  const { mutate } = useGenerateCourseDescription();
 
   const onSubmit = (data: CourseRequest) => {
     if (id) {
@@ -38,6 +47,40 @@ export const CourseForm = ({ form }: Props) => {
     } else {
       createCourse(data);
     }
+  };
+
+  const handleAiGeneration = (data: { words: string }) => {
+    if (!form.getValues("title")) {
+      form.setError("title", {
+        message: "Please provide title first",
+        type: "validate",
+      });
+      form.setFocus("title");
+      return;
+    }
+    setIsLoading(true);
+    form.setValue("description", "Loading...");
+    form.clearErrors("title");
+
+    mutate(
+      {
+        title: form.getValues("title"),
+        level: form.getValues("level"),
+        words: +data.words || 50,
+      },
+      {
+        onSuccess: (data) => {
+          setIsLoading(false);
+
+          form.setValue("description", data.data.description);
+        },
+        onError: () => {
+          toast.error("Failed to generate description");
+          form.setValue("description", "");
+          setIsLoading(false);
+        },
+      }
+    );
   };
 
   return (
@@ -63,9 +106,25 @@ export const CourseForm = ({ form }: Props) => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Course Description</FormLabel>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>
+                      <p>Course Description</p>
+                    </FormLabel>
+                    <InputForm
+                      loading={isLoading}
+                      open={isAiGenerationOpen}
+                      setIsAiGenerationOpen={setIsAiGenerationOpen}
+                      onSubmit={handleAiGeneration}
+                      onCancel={() => {
+                        setIsAiGenerationOpen(false);
+                      }}
+                      onClear={() => {
+                        form.setValue("description", "");
+                      }}
+                    />
+                  </div>
                   <FormControl>
-                    <Textarea rows={3} {...field} />
+                    <Textarea disabled={isLoading} rows={3} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
