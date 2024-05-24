@@ -28,32 +28,38 @@ const LessonQuizModal = (
 ) => {
   const { lessonId } = props;
   const { data, isPending, isError } = useGetQuizQuery(lessonId as string);
-  const [quizData, setQuizData] = useState<QuizData[] | undefined>(undefined);
-  const [isQuizLoading, setIsQuizLoading] = useState<boolean | undefined>(undefined);
-  const [isQuizError, setIsQuizError] = useState<boolean | undefined>(undefined);
+  const [quizState, setQuizState] = useState<{
+    quizData?: QuizData[];
+    isQuizLoading: boolean;
+    isQuizError: boolean;
+  }>({
+    quizData: undefined,
+    isQuizLoading: false,
+    isQuizError: false,
+  });
 
-  useEffect(() => { 
-    setQuizData(data);
-    setIsQuizLoading(isPending);
-    setIsQuizError(isError);
-  }, [data, isPending, isError])
+  useEffect(() => {
+    setQuizState({
+      quizData: data,
+      isQuizLoading: isPending,
+      isQuizError: isError,
+    });
+  }, [data, isPending, isError]);
 
   const regenerateQuizMutation = useRegenerateQuizMutation(lessonId);
 
   const handleRegenerateQuiz = async () => {
+    setQuizState((prevState) => ({ ...prevState, isLoading: true, isError: false, quizData: undefined }));
     try {
-      setQuizData(undefined);
-      setIsQuizError(false);
-      setIsQuizLoading(true);
       const newQuizData = await regenerateQuizMutation.mutateAsync();
-      setQuizData(newQuizData);
-      setIsQuizLoading(false);
+      setQuizState({ quizData: newQuizData, isQuizLoading: false, isQuizError: false });
     } catch (error) {
-      setIsQuizLoading(false);
-      setIsQuizError(true);
       console.error(error);
+      setQuizState({ quizData: undefined, isQuizLoading: false, isQuizError: true });
     }
-  }
+  };
+
+  const { quizData, isQuizLoading, isQuizError } = quizState;
 
   return (
     <Dialog>
