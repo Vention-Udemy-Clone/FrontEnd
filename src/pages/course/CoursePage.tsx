@@ -1,3 +1,7 @@
+import { CircleX, Expand, Home, PanelRightClose, PanelRightOpen, Shrink } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,9 +12,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import useGetCourseQuery from "@/queries/course/useGetCourseQuery";
-import { CircleX, Expand, Home, PanelRightClose, PanelRightOpen, Shrink } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
 import { LeftBlock } from "./components/LeftBlock";
 import { MiddleBlock } from "./components/MiddleBlock";
 import { RightBlock } from "./components/RightBlock";
@@ -51,20 +52,23 @@ export const CoursePage = () => {
         <Breadcrumb className="max-[1100px]:ml-7">
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/">
-                <Home size={20} />
+              <BreadcrumbLink asChild>
+                <Link to="/">
+                  <Home size={20} />
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink href={`/course/${courseId}`}>
-                {data.title.split(" ").slice(0, 5).join(" ")}
+                {data?.title.split(" ").slice(0, 5).join(" ")}
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbPage>
-                Module {activeLessonAndModule.moduleNum} • Lesson {activeLessonAndModule.lessonNum}
+                Module {activeLessonAndModule.moduleNum || 1} • Lesson{" "}
+                {activeLessonAndModule.lessonNum || 1}
               </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>

@@ -1,6 +1,3 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { CourseData } from "@/types/course.types";
 import {
   BarChart3,
   BookCheck,
@@ -15,6 +12,10 @@ import {
   UsersRound,
 } from "lucide-react";
 import { useState } from "react";
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { CourseData } from "@/types/course.types";
 
 export const RightBlock = ({ course, styles }: { course: CourseData; styles: string }) => {
   const [tab, setTab] = useState("overview");
@@ -92,19 +93,19 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
           </TabsList>
           <TabsContent value="overview" className="py-3">
             <div>
-              <div className="mb-3 flex  items-center gap-2">
-                <div className="flex overflow-hidden">
-                  <p className="mr-1 line-clamp-1 break-words text-gray-500">Course by</p>
+              <div className="mb-3">
+                <div className="flex items-center gap-2 overflow-hidden text-sm">
+                  <p className="line-clamp-1 break-words text-muted-foreground">Course by</p>
                   <p
                     onClick={() => setTab("tutors")}
                     className="cursor-pointer text-primary underline"
                   >
-                    Nik Shipov
+                    {course.author.fullName}
                   </p>
                 </div>
               </div>
-              <p className="mb-4 text-2xl font-semibold">{course.title}</p>
-              <p className="  mb-4 text-gray-500">{course.description}</p>
+              <p className="mb-2 text-2xl font-semibold">{course.title}</p>
+              <p className="mb-4 text-sm text-muted-foreground">{course.description}</p>
               <div>
                 <p className="mb-4 font-semibold">This course will have these modules: </p>
                 <ul>
@@ -121,7 +122,7 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
                               // onClick={() => {
                               //   handleLessonSelect(module.id, lesson.id);
                               // }}
-                              className="line-clamp-2 text-left font-semibold text-gray-500 hover:text-primary"
+                              className="line-clamp-2 text-left font-semibold text-muted-foreground hover:text-primary"
                             >
                               {module.title}
                             </p>
@@ -141,20 +142,22 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
             <div>
               <div className="mb-3 items-start gap-2">
                 <div className="mb-1 flex items-center overflow-hidden">
-                  <p className="line-clamp-2 break-words text-2xl font-semibold ">Nik Shipov</p>
+                  <p className="line-clamp-2 break-words text-2xl font-semibold ">
+                    {course.author.fullName}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center justify-between gap-3">
                 <img
                   className="h-28 w-28 shrink-0 rounded-full object-cover transition-all duration-300 hover:scale-105	"
-                  src="https://source.unsplash.com/random"
+                  src={course.author.avatarUrl || "https://picsum.photos/200"}
                   alt="author image"
                 />
                 <div className="flex grow flex-col gap-2">
                   <div className="flex gap-2 transition-all">
                     <Star strokeWidth={1.5} className="text-primary" />{" "}
                     <p className="font-semibold">{(Math.random() * 1.5 + 3.5).toFixed(1) + " "}</p>
-                    <p className="text-gray-500">ratings</p>
+                    <p className="text-muted-foreground">ratings</p>
                   </div>
                   <div className="flex gap-2">
                     <MessageSquareQuote strokeWidth={1.5} className="text-primary" />
@@ -162,21 +165,21 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
                     <p className="font-semibold">
                       {(Math.floor(Math.random() * 3_000) + 1).toLocaleString() + " "}
                     </p>
-                    <p className="text-gray-500">feedbacks</p>
+                    <p className="text-muted-foreground">feedbacks</p>
                   </div>
                   <div className="flex gap-2">
                     <Users strokeWidth={1.5} className="text-primary" />
                     <p className="font-semibold">
                       {(Math.floor(Math.random() * 300_000) + 1).toLocaleString() + " "}
                     </p>
-                    <p className="text-gray-500">students</p>
+                    <p className="text-muted-foreground">students</p>
                   </div>
                   <div className="flex gap-2">
                     <BookCopy strokeWidth={1.5} className="text-primary" />
                     <p className="font-semibold">
                       {(Math.floor(Math.random() * 30) + 1).toLocaleString() + " "}
                     </p>
-                    <p className="text-gray-500">courses</p>
+                    <p className="text-muted-foreground">courses</p>
                   </div>
                 </div>
               </div>

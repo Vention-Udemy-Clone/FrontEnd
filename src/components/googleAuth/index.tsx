@@ -1,17 +1,19 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ExitIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { Button } from "../ui/button";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { LOCAL_STORAGE_KEYS } from "@/config/local-storage.config";
 import { removeFromLocalStorage } from "@/lib/utils";
 import useSignInMutation from "@/mutations/useSignInMutation";
 import useGetUserQuery from "@/queries/useGetUserQuery";
-import useUserStore from "@/store/userStore";
+import { removeUser, useUserStore } from "@/store/userStore";
 import { Login } from "@/types/user.types";
 import { ModeToggle } from "../ModeToggle";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,7 +30,6 @@ function GoogleLoginButton() {
   const { isFetching } = useGetUserQuery();
 
   const user = useUserStore((state) => state.user);
-  const removeUser = useUserStore((state) => state.removeUser);
 
   const { mutate, isPending } = useSignInMutation();
 
@@ -86,7 +87,7 @@ function GoogleLoginButton() {
                 variant={"outline"}
               >
                 <Avatar className="mr-2 h-7 w-7  ">
-                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarImage src={user.avatarUrl} />
                   <AvatarFallback>NS</AvatarFallback>
                 </Avatar>
                 <HamburgerMenuIcon className="h-5 w-5 text-gray-600" />
@@ -110,13 +111,9 @@ function GoogleLoginButton() {
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <span>Team</span>
-                </DropdownMenuItem>
-
-                <DropdownMenuItem>
-                  <span>New Team</span>
-                </DropdownMenuItem>
+                <Link to="/my-courses">
+                  <DropdownMenuItem>My Courses</DropdownMenuItem>
+                </Link>
               </DropdownMenuGroup>
 
               <DropdownMenuSeparator />
