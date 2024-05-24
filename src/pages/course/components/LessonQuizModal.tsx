@@ -66,7 +66,7 @@ const LessonQuizModal = (
           </Button>
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[625px]">
+      <DialogContent className="lg:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Generate a Self-Quiz with AI</DialogTitle>
           <DialogDescription>
