@@ -1,6 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import useGetLessonQuery from "@/queries/course/useGetLessonQuery";
 import { useParams } from "react-router-dom";
+import LessonQuizModal from "./LessonQuizModal";
 
 export const MiddleBlock = ({
   activeLessonAndModule: { moduleNum, lessonNum },
@@ -8,7 +9,6 @@ export const MiddleBlock = ({
   activeLessonAndModule: { moduleNum: string; lessonNum: string };
 }) => {
   const { lessonId } = useParams();
-
   const { isPending, data: lesson, isError } = useGetLessonQuery(lessonId as string);
 
   // ! Make a Skeleton component to show a loading state
@@ -43,6 +43,9 @@ export const MiddleBlock = ({
           </div>
         </div>
       </div>
+      <LessonQuizModal
+        lessonId={lessonId as string}
+      />
     </div>
   );
 };

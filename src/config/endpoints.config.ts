@@ -16,6 +16,7 @@ export const ENDPOINTS = {
     root: "/lessons",
     getOneLesson: (lessonId: string) => `/lessons/${lessonId}`,
     generateTexts: "/lessons/generate-texts",
+    getQuiz: (lessonId: string) => `/quiz/${lessonId}`,
   },
   module: {
     root: "/modules",
