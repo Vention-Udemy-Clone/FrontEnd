@@ -49,7 +49,7 @@ const LessonQuizModal = (
   const regenerateQuizMutation = useRegenerateQuizMutation(lessonId);
 
   const handleRegenerateQuiz = async () => {
-    setQuizState((prevState) => ({ ...prevState, isLoading: true, isError: false, quizData: undefined }));
+    setQuizState({ isQuizLoading: true, isQuizError: false, quizData: undefined });
     try {
       const newQuizData = await regenerateQuizMutation.mutateAsync();
       setQuizState({ quizData: newQuizData, isQuizLoading: false, isQuizError: false });
@@ -74,7 +74,7 @@ const LessonQuizModal = (
       </DialogTrigger>
       <DialogContent className="lg:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle>Generate a Self-Quiz with AI</DialogTitle>
+          <DialogTitle>Self-Quiz with AI</DialogTitle>
           <DialogDescription>
             Try to answer the following questions to test your knowledge. Answers are hidden by default. Click on the question to reveal the answer.
           </DialogDescription>
