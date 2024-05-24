@@ -14,6 +14,7 @@ export const ENDPOINTS = {
   lesson: {
     root: "/lessons",
     getOneLesson: (lessonId: string) => `/lessons/${lessonId}`,
+    getQuiz: (lessonId: string) => `/quiz/${lessonId}`,
   },
   module: {
     root: "/modules",

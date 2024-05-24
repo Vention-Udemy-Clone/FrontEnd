@@ -1,5 +1,6 @@
 import useGetLessonQuery from "@/queries/course/useGetLessonQuery";
 import { useParams } from "react-router-dom";
+import LessonQuizModal from "./LessonQuizModal";
 
 export const MiddleBlock = ({
   activeLessonAndModule: { moduleNum, lessonNum },
@@ -7,7 +8,6 @@ export const MiddleBlock = ({
   activeLessonAndModule: { moduleNum: string; lessonNum: string };
 }) => {
   const { lessonId } = useParams();
-
   const { isPending, data: lesson, isError } = useGetLessonQuery(lessonId as string);
 
   if (isPending) return <div className=" min-w-[500px]">Loading...</div>;
@@ -38,6 +38,9 @@ export const MiddleBlock = ({
           </div>
         </div>
       </div>
+      <LessonQuizModal
+        lessonId={lessonId as string}
+      />
     </div>
   );
 };
