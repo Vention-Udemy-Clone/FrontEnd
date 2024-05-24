@@ -90,7 +90,7 @@ const LessonQuizModal = (
           ))}
         </Accordion>
         <DialogFooter>
-          <Button onClick={handleRegenerateQuiz}>Regenerate quiz</Button>
+          <Button disabled={isQuizLoading} onClick={handleRegenerateQuiz}>Regenerate quiz</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
