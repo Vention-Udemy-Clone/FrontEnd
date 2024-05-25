@@ -21,6 +21,9 @@ export const useUpdateLesson = () => {
       await queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.query.lessons.lesson, res.data.data.id],
       });
+      await queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.query.course, id],
+      });
     },
   });
 

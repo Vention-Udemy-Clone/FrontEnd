@@ -98,7 +98,7 @@ export const LeftBlock = ({
 
                 <div className="text-left">
                   <p className="text-xs text-gray-500"> Module {i}</p>
-                  <p className="line-clamp-2 font-semibold">{module.title}</p>
+                  <p className="line-clamp-2 text-xs font-medium">{module.title}</p>
                 </div>
               </div>
             </AccordionTrigger>
@@ -106,7 +106,7 @@ export const LeftBlock = ({
               {module.Lesson.map((lesson, lessonIndex) => (
                 <div
                   key={lesson.id}
-                  className="mb-4 flex items-center gap-6  last:[&_.custom-class]:before:content-['1']"
+                  className="mb-4 flex items-center gap-6  last:[&_.custom-class]:before:content-['']"
                 >
                   <Checkbox
                     className={`${selectedLesson === lesson.id ? "border-2 border-dashed before:border-primary " : "before:border-gray-400"} custom-class relative h-5 w-5 rounded-full bg-background before:absolute before:left-1/2 before:top-[112%] before:h-10 before:border-collapse before:-translate-x-1/2 before:border-r-2 before:border-dotted  before:content-[''] `}
@@ -125,7 +125,7 @@ export const LeftBlock = ({
                             });
                             setLeftBlockOpen(false);
                           }}
-                          className={`${selectedLesson === lesson.id ? "text-primary " : ""} line-clamp-2 text-left font-semibold hover:text-primary`}
+                          className={`${selectedLesson === lesson.id ? "text-primary " : ""} line-clamp-2 text-left text-xs font-medium hover:text-primary`}
                         >
                           {lesson.title}
                         </p>

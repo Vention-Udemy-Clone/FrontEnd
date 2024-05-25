@@ -13,10 +13,19 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import useGenerateLessonTexts from "@/mutations/useGenerateLessonTexts";
 import { useCreateLesson } from "@/services/lessons/useCreateLesson";
 import { useDeleteLesson } from "@/services/lessons/useDeleteLesson";
 import { useUpdateLesson } from "@/services/lessons/useUpdateLesson";
-import { Lesson, LessonRequest, lessonSchema } from "@/types/lesson.types";
+import {
+  GenerateLessonTextsResponse,
+  Lesson,
+  LessonContext,
+  LessonRequest,
+  lessonSchema,
+} from "@/types/lesson.types";
+import { toast } from "sonner";
+import { InputForm } from "./InputForm";
 
 type Props = {
   moduleId: string;
@@ -36,6 +45,14 @@ export const LessonForm = ({
   lessonCreation,
   setLessonCreation,
 }: Props) => {
+  const [isOverviewLoading, setIsOverviewLoading] = useState(false);
+  const [isContentLoading, setIsContentLoading] = useState(false);
+  const [isAiOverviewGenerationOpen, setIsAiOverviewGenerationOpen] = useState(false);
+  const [isAiContentGenerationOpen, setIsAiContentGenerationOpen] = useState(false);
+
+  const { mutate: overviewMutate } = useGenerateLessonTexts();
+  const { mutate: contentMutate } = useGenerateLessonTexts();
+
   const { createLesson } = useCreateLesson(moduleId);
   const { updateLesson } = useUpdateLesson();
   const { deleteLesson } = useDeleteLesson();
@@ -88,6 +105,46 @@ export const LessonForm = ({
     }
   }, [lessonData, lessonCreation]);
 
+  const handleAiGeneration = (contextEnum: LessonContext, data: { words: string }) => {
+    const context = contextEnum === LessonContext.OVERVIEW ? "overview" : "content";
+    const setLoadingState = context === "overview" ? setIsOverviewLoading : setIsContentLoading;
+    const mutateFn = context === "overview" ? overviewMutate : contentMutate;
+
+    if (!form.getValues("title")) {
+      form.setError("title", {
+        message: "Please provide title first",
+        type: "validate",
+      });
+      form.setFocus("title");
+      return;
+    }
+
+    setLoadingState(true);
+    form.setValue(context, "Loading...");
+    form.clearErrors("title");
+
+    const mutateOptions = {
+      onSuccess: (data: GenerateLessonTextsResponse) => {
+        setLoadingState(false);
+        form.setValue(context, data.data.text);
+      },
+      onError: () => {
+        toast.error("Failed to generate description");
+        form.setValue(context, "");
+        setLoadingState(false);
+      },
+    };
+
+    mutateFn(
+      {
+        title: form.getValues("title"),
+        context: contextEnum,
+        words: +data.words || 50,
+      },
+      mutateOptions
+    );
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full flex-col space-y-3">
@@ -109,9 +166,24 @@ export const LessonForm = ({
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Lesson Overview</FormLabel>
+              <div className="flex items-center justify-between">
+                <FormLabel>Lesson Overview</FormLabel>
+
+                <InputForm
+                  loading={isOverviewLoading}
+                  open={isAiOverviewGenerationOpen}
+                  setIsAiGenerationOpen={setIsAiOverviewGenerationOpen}
+                  onSubmit={handleAiGeneration.bind(null, LessonContext.OVERVIEW)}
+                  onCancel={() => {
+                    setIsAiOverviewGenerationOpen(false);
+                  }}
+                  onClear={() => {
+                    form.setValue("overview", "");
+                  }}
+                />
+              </div>
               <FormControl>
-                <Textarea rows={4} {...field} />
+                <Textarea disabled={isOverviewLoading} rows={4} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -122,9 +194,24 @@ export const LessonForm = ({
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Lesson Content</FormLabel>
+              <div className="flex items-center justify-between">
+                <FormLabel>Lesson Content</FormLabel>
+
+                <InputForm
+                  loading={isContentLoading}
+                  open={isAiContentGenerationOpen}
+                  setIsAiGenerationOpen={setIsAiContentGenerationOpen}
+                  onSubmit={handleAiGeneration.bind(null, LessonContext.CONTENT)}
+                  onCancel={() => {
+                    setIsAiContentGenerationOpen(false);
+                  }}
+                  onClear={() => {
+                    form.setValue("content", "");
+                  }}
+                />
+              </div>
               <FormControl>
-                <Textarea rows={8} {...field} />
+                <Textarea disabled={isContentLoading} rows={8} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
