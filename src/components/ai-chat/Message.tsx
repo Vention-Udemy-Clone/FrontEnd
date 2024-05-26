@@ -18,7 +18,7 @@ export const Message = ({ role, text, messageRef }: MessageProps) => {
             : "w-full  max-w-[900px] rounded-r-lg rounded-t-lg bg-muted"
         }  overflow-hidden break-words px-4 py-2`}
       >
-        <p>{text}</p>
+        <pre className="whitespace-pre-wrap break-words">{text}</pre>
       </div>
     </div>
   );

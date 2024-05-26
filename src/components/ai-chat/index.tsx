@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import useLessonChatMutation from "@/mutations/useLessonChatMutation";
 import { ChatMessage } from "@/types/lessons.types";
 import { Loading } from "../Loading";
+import { NoMessages } from "./NoMessages";
 
 export const AiChat = () => {
   const messageRef = useRef<HTMLDivElement>(null);
@@ -71,12 +72,21 @@ export const AiChat = () => {
           <X onClick={closeModal} className=" cursor-pointer text-gray-400" />
         </DrawerHeader>
 
-        <div className="scrollbar-hide flex grow flex-col gap-6 overflow-scroll p-4">
-          {isPending && <Loading />}
+        <div className="relative h-[calc(100vh-113px)]">
+          <div className="scrollbar-hide flex h-full flex-col gap-6 overflow-scroll p-4">
+            {isPending && <Loading />}
 
-          {chatHistory.map((message, index) => (
-            <Message key={index} role={message.role} text={message.text} messageRef={messageRef} />
-          ))}
+            {!isPending && chatHistory.length === 0 && <NoMessages />}
+
+            {chatHistory.map((message, index) => (
+              <Message
+                key={index}
+                role={message.role}
+                text={message.text}
+                messageRef={messageRef}
+              />
+            ))}
+          </div>
         </div>
 
         <DrawerFooter className="border-t">
