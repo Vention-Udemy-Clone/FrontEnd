@@ -15,6 +15,7 @@ import useGetCourseQuery from "@/queries/course/useGetCourseQuery";
 import { LeftBlock } from "./components/LeftBlock";
 import { MiddleBlock } from "./components/MiddleBlock";
 import { RightBlock } from "./components/RightBlock";
+import { AiChat } from "@/components/ai-chat";
 
 export const CoursePage = () => {
   const { id: courseId } = useParams();
@@ -73,6 +74,7 @@ export const CoursePage = () => {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
+
         <div>
           {showPanels ? (
             <Expand
@@ -185,6 +187,8 @@ export const CoursePage = () => {
           </>
         )}
       </div>
+
+      <AiChat />
     </>
   );
 };

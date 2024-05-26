@@ -29,7 +29,7 @@ export const MiddleBlock = ({
       </div>
       <div>
         <div key={lesson.id}>
-          <div className="relative mb-4 rounded-2xl border p-3">
+          <div className="relative mb-4 rounded-xl border p-3">
             <div>
               <h1 className="mb-3 font-semibold max-[500px]:text-sm">{lesson.title}</h1>
               <Separator orientation="horizontal" className="mb-3" />
@@ -38,7 +38,7 @@ export const MiddleBlock = ({
               </p>
             </div>
           </div>
-          <div className="mb-5 whitespace-pre-wrap rounded-2xl border-2 p-3 text-sm text-gray-900  dark:text-gray-200">
+          <div className="mb-5 whitespace-pre-wrap rounded-xl border p-3 text-sm text-gray-900  dark:text-gray-200">
             <div dangerouslySetInnerHTML={{ __html: lesson.content }}></div>
           </div>
         </div>
