@@ -14,7 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { QuizData } from "@/types/lesons.types";
+import { QuizData } from "@/types/lessons.types";
 import useRegenerateQuizMutation from "@/mutations/useGetQuizMutation";
 import { useEffect, useState } from "react";
 import useGetQuizQuery from "@/queries/course/useGetQuizQuery";

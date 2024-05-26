@@ -1,7 +1,7 @@
 import { ENDPOINTS } from "@/config/endpoints.config";
 import { QUERY_KEYS } from "@/config/react-query.config";
 import request from "@/lib/request";
-import { LessonResponse } from "@/types/lesons.types";
+import { LessonResponse } from "@/types/lessons.types";
 import { useQuery } from "@tanstack/react-query";
 
 function useGetLessonQuery(lessonId: string) {

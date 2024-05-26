@@ -16,8 +16,18 @@ export type LessonResponse = {
 export type QuizData = {
   question: string;
   answer: string;
-}
+};
 
 export type QuizResponse = {
   data: QuizData[];
-}
+};
+
+export type ChatMessage = {
+  role: "user" | "model";
+  text: string;
+};
+
+export type ChatResponse = {
+  success: boolean;
+  history: ChatMessage[];
+};
