@@ -107,7 +107,7 @@ export const AiChat = () => {
             <div className="flex shrink-0 items-center gap-4 text-xl sm:gap-6 sm:text-2xl">
               <Smile className="cursor-pointer text-gray-400 transition-colors" />
               <button disabled={isPending} form="chat-form" type="submit">
-                <SendHorizonal className="cursor-pointer text-primary transition-colors" />
+                <SendHorizonal className="cursor-pointer text-gray-400 transition-colors hover:text-primary" />
               </button>
             </div>
           </div>
