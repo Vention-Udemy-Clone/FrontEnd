@@ -80,7 +80,7 @@ export const LeftBlock = ({
   };
 
   return (
-    <div className={`${styles} pr-4`}>
+    <div className={`${styles}`}>
       {modules.map((module, i) => (
         <Accordion
           key={module.id}
@@ -88,7 +88,7 @@ export const LeftBlock = ({
           defaultValue={moduleId || modules[0].id}
           collapsible
         >
-          <AccordionItem className="mb-6 rounded-2xl border-2 " value={module.id}>
+          <AccordionItem className="mb-2 rounded-xl border " value={module.id}>
             <AccordionTrigger className=" rounded-[16px] border-none px-2 py-3 hover:bg-[#edf1f2] hover:no-underline data-[state=open]:bg-[#edf1f2] dark:hover:bg-gray-800  data-[state=open]:dark:bg-gray-800">
               <div className="flex items-center justify-center gap-3 pl-2">
                 <Checkbox

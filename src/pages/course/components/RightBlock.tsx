@@ -24,8 +24,8 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
     setTab(value);
   };
   return (
-    <div className={`pl-3 sm:pl-4 ${styles}`}>
-      <div className="mb-3 flex w-full flex-col gap-2 rounded-xl border-2 p-2 text-sm sm:mb-6 sm:rounded-2xl sm:p-4 sm:text-base">
+    <div className={`${styles}`}>
+      <div className="mb-3 flex w-full flex-col gap-2 rounded-xl border p-2 text-sm sm:mb-4 sm:rounded-xl sm:p-4 sm:text-base">
         <div className="flex justify-between text-sm">
           <div className="flex items-center justify-between gap-3">
             <BookCheck strokeWidth={1.75} />
@@ -73,18 +73,18 @@ export const RightBlock = ({ course, styles }: { course: CourseData; styles: str
         <Tabs
           value={tab}
           onValueChange={onTabChange}
-          className="w-full rounded-xl border-2 px-3 py-2 sm:rounded-2xl sm:px-4"
+          className="w-full rounded-xl border px-3 py-2 sm:rounded-xl sm:px-4"
         >
           <TabsList className="flex w-full justify-between gap-1 rounded-2xl bg-background p-0 sm:gap-2">
             <TabsTrigger
-              className="shrink grow border-2 text-foreground hover:bg-[#edf1f2] data-[state=active]:border-2 data-[state=active]:border-primary data-[state=active]:bg-[#edf1f2] dark:hover:bg-gray-800 data-[state=active]:dark:bg-gray-800 "
+              className="shrink grow border text-foreground hover:bg-[#edf1f2] data-[state=active]:border data-[state=active]:border-primary data-[state=active]:bg-[#edf1f2] dark:hover:bg-gray-800 data-[state=active]:dark:bg-gray-800 "
               value="overview"
             >
               <FileText className="mr-2" />
               Overview
             </TabsTrigger>
             <TabsTrigger
-              className="grow border-2  text-foreground hover:bg-[#edf1f2] data-[state=active]:border-2 data-[state=active]:border-primary data-[state=active]:bg-[#edf1f2] dark:hover:bg-gray-800  data-[state=active]:dark:bg-gray-800"
+              className="grow border  text-foreground hover:bg-[#edf1f2] data-[state=active]:border data-[state=active]:border-primary data-[state=active]:bg-[#edf1f2] dark:hover:bg-gray-800  data-[state=active]:dark:bg-gray-800"
               value="tutors"
             >
               <UsersRound className="mr-2" />
