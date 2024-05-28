@@ -33,10 +33,9 @@ export const InputForm = ({
           <Input
             className="h-7 w-20 p-1"
             type="number"
-            max={250}
             required
             value={value}
-            placeholder="50-250"
+            placeholder="50-..."
             onChange={(e) => {
               setValue(e.target.value);
             }}
@@ -49,7 +48,7 @@ export const InputForm = ({
               size="icon"
               type="button"
               onClick={() => {
-                if (parseInt(value) < 50 || parseInt(value) > 250 || value === "") {
+                if (parseInt(value) < 50 || value === "") {
                   setValue("50");
                   onSubmit({ words: "50" });
                   return;

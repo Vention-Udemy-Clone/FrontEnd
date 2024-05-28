@@ -3,7 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Main } from "@/pages";
 import { CoursePage } from "@/pages/course/CoursePage";
-import MentorCourses from "@/pages/MentorCourses";
+import { MentorCourses } from "@/pages/MentorCourses";
+import { GenerateCourse } from "@/pages/MentorCourses/GenerateCourse";
 import { MentorCoursePage } from "@/pages/MentorCourses/MentorCoursePage";
 
 const routes = createBrowserRouter([
@@ -28,8 +29,9 @@ const routes = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { index: true, element: <MentorCourses /> },
-      { path: "create", element: <MentorCoursePage /> },
       { path: ":id", element: <MentorCoursePage /> },
+      { path: "create", element: <MentorCoursePage /> },
+      { path: "generate", element: <GenerateCourse /> },
     ],
   },
 ]);

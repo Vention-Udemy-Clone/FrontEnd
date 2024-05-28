@@ -22,6 +22,13 @@ export const courseSchema = z.object({
 
 export type CourseRequest = z.infer<typeof courseSchema>;
 
+export const generateCourseSchema = z.object({
+  title: z.string().min(3, "Must be at least 3 characters"),
+  authorId: z.string(),
+});
+
+export type GenerateCourseRequest = z.infer<typeof generateCourseSchema>;
+
 export type Course = {
   id: string;
   title: string;

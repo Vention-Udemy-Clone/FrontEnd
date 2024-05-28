@@ -7,7 +7,7 @@ export const MainLayout = () => {
     <div className="flex min-h-svh flex-col">
       <Header />
 
-      <main className="container mx-auto flex-1 px-4 py-4">
+      <main className="container flex flex-1 px-4 py-4">
         <Outlet />
       </main>
 
