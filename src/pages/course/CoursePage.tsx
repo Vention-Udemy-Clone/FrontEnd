@@ -2,6 +2,7 @@ import { CircleX, Expand, Home, PanelRightClose, PanelRightOpen, Shrink } from "
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 
+import { AiChat } from "@/components/ai-chat";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -15,7 +16,6 @@ import useGetCourseQuery from "@/queries/course/useGetCourseQuery";
 import { LeftBlock } from "./components/LeftBlock";
 import { MiddleBlock } from "./components/MiddleBlock";
 import { RightBlock } from "./components/RightBlock";
-import { AiChat } from "@/components/ai-chat";
 
 export const CoursePage = () => {
   const { id: courseId } = useParams();
@@ -48,7 +48,7 @@ export const CoursePage = () => {
 
   if (isError) return <div>Error...</div>;
   return (
-    <>
+    <div className="w-full">
       <div className="mb-4 mr-5 flex items-start justify-between">
         <Breadcrumb className="max-[1100px]:ml-7">
           <BreadcrumbList>
@@ -189,6 +189,6 @@ export const CoursePage = () => {
       </div>
 
       <AiChat />
-    </>
+    </div>
   );
 };

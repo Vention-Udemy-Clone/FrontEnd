@@ -45,7 +45,10 @@ function GoogleLoginButton() {
         const userInfo = await res.json();
 
         const userData: Login = {
-          fullName: userInfo.given_name + " " + userInfo.family_name,
+          // fullName: userInfo.given_name + " " + userInfo.family_name || "",
+          fullName: userInfo.family_name
+            ? userInfo.given_name + " " + userInfo.family_name
+            : userInfo.name,
           email: userInfo.email,
           avatarUrl: userInfo.picture,
         };

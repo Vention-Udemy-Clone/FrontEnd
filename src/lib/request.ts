@@ -1,10 +1,10 @@
+import { LOCAL_STORAGE_KEYS } from "@/config/local-storage.config";
 import axios from "axios";
 import { getValueFromLocalStorage } from "./utils";
-import { LOCAL_STORAGE_KEYS } from "@/config/local-storage.config";
 
 export const request = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  timeout: 10000, // 10 seconds
+  timeout: 15000, // 15 seconds
 });
 
 request.interceptors.request.use(
