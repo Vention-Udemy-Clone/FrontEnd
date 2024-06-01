@@ -1,3 +1,11 @@
+import { useEffect, useState } from "react";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,16 +16,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { QuizData } from "@/types/lessons.types";
 import useRegenerateQuizMutation from "@/mutations/useGetQuizMutation";
-import { useEffect, useState } from "react";
 import useGetQuizQuery from "@/queries/course/useGetQuizQuery";
+import { QuizData } from "@/types/lessons.types";
 
 export interface QuizProps {
   lessonId: string;
@@ -68,7 +69,7 @@ const LessonQuizModal = (props: QuizProps) => {
           </Button>
         </div>
       </DialogTrigger>
-      <DialogContent className="lg:max-w-[600px]">
+      <DialogContent className="lg:max-w-[640px]">
         <DialogHeader>
           <DialogTitle>Self-Quiz with AI</DialogTitle>
           <DialogDescription>

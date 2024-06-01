@@ -11,6 +11,7 @@ export const ENDPOINTS = {
     getOneCourse: (courseId: string) => `/courses/${courseId}`,
     myCourses: (authorId: string) => `/courses/my-courses/${authorId}`,
     generateDescription: "/courses/generate-description",
+    generateCourse: "/courses/generate-course",
   },
   lesson: {
     root: "/lessons",

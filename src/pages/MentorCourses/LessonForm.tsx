@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import Tiptap from "@/components/Tiptap";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,7 +13,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import useGenerateLessonTexts from "@/mutations/useGenerateLessonTexts";
 import { useCreateLesson } from "@/services/lessons/useCreateLesson";
 import { useDeleteLesson } from "@/services/lessons/useDeleteLesson";
@@ -183,7 +183,13 @@ export const LessonForm = ({
                 />
               </div>
               <FormControl>
-                <Textarea disabled={isOverviewLoading} rows={4} {...field} />
+                {/* <Textarea disabled={isOverviewLoading} rows={4} {...field} /> */}
+                <Tiptap
+                  content={field.value}
+                  onChange={field.onChange}
+                  editable={!isOverviewLoading}
+                  placeholder="Write a brief overview of the lesson"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -211,7 +217,13 @@ export const LessonForm = ({
                 />
               </div>
               <FormControl>
-                <Textarea disabled={isContentLoading} rows={8} {...field} />
+                {/* <Textarea disabled={isContentLoading} rows={8} {...field} /> */}
+                <Tiptap
+                  content={field.value}
+                  onChange={field.onChange}
+                  editable={!isContentLoading}
+                  placeholder="Write the content of the lesson"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

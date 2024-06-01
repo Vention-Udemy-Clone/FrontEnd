@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import { Smile, Paperclip, SendHorizonal, X, Maximize2, Minimize2, Bot } from "lucide-react";
-import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTrigger } from "../ui/drawer";
-import { Message } from "./Message";
-import { useParams } from "react-router-dom";
 import useLessonChatMutation from "@/mutations/useLessonChatMutation";
 import { ChatMessage } from "@/types/lessons.types";
+import { Bot, Maximize2, Minimize2, Paperclip, SendHorizonal, Smile, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Loading } from "../Loading";
+import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTrigger } from "../ui/drawer";
+import { Message } from "./Message";
 import { NoMessages } from "./NoMessages";
 
 export const AiChat = () => {
@@ -46,7 +46,7 @@ export const AiChat = () => {
   return (
     <Drawer open={isOpen} onOpenChange={setOpen} direction="right">
       <DrawerTrigger
-        className="fixed bottom-10 right-10 flex items-center justify-center gap-2  rounded border bg-muted px-4 py-3 shadow"
+        className="fixed bottom-10 right-10 flex items-center justify-center gap-2 rounded border bg-muted px-4 py-3 shadow hover:bg-muted/95"
         onClick={openModal}
       >
         <p>Ask AI</p>
