@@ -2,6 +2,7 @@ import { CircleX, Expand, Home, PanelRightClose, PanelRightOpen, Shrink } from "
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 
+import { AiChat } from "@/components/ai-chat";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -15,7 +16,6 @@ import useGetCourseQuery from "@/queries/course/useGetCourseQuery";
 import { LeftBlock } from "./components/LeftBlock";
 import { MiddleBlock } from "./components/MiddleBlock";
 import { RightBlock } from "./components/RightBlock";
-import { AiChat } from "@/components/ai-chat";
 
 export const CoursePage = () => {
   const { id: courseId } = useParams();
@@ -127,7 +127,7 @@ export const CoursePage = () => {
                     setActiveLessonAndModule={setActiveLessonAndModule}
                     modules={data.Module}
                     courseId={courseId as string}
-                    styles={"block w-full max-w-[500px] pl-3 overflow-auto"}
+                    styles={"block w-full max-w-[500px] pl-3 overflow-auto pr-4"}
                     setLeftBlockOpen={setOpen}
                   />
                 </div>
@@ -165,7 +165,7 @@ export const CoursePage = () => {
                 <div className="overflow-auto">
                   <div className="absolute left-2 top-0 z-50 h-9 w-[95%] rounded-tl-3xl p-2"></div>
                   <RightBlock
-                    styles={"block w-full max-w-[500px] overflow-auto	pr-3 pt-3"}
+                    styles={"block w-full max-w-[500px] overflow-auto	pr-3 pt-3 pl-4"}
                     course={data}
                   />
                 </div>

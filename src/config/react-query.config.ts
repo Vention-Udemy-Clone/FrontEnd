@@ -26,5 +26,8 @@ export const QUERY_KEYS = {
     lessons: {
       lesson: "mylesson",
     },
+    note: {
+      notes: "notes",
+    },
   },
 } as const;
