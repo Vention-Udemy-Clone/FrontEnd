@@ -29,5 +29,8 @@ export const QUERY_KEYS = {
     note: {
       notes: "notes",
     },
+    summary: {
+      summary: "summary",
+    },
   },
 } as const;

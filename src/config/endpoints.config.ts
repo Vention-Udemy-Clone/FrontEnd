@@ -25,6 +25,11 @@ export const ENDPOINTS = {
     listNotes: (lessonId: string) => `/notes/${lessonId}`,
     oneNote: (noteId: string) => `/notes/${noteId}`,
   },
+  summary: {
+    root: "summary",
+    oneSummary: (summaryId: string) => `/summary/${summaryId}`,
+    generateSummary: (lessonId: string) => `/summary/generate/${lessonId}`,
+  },
   module: {
     root: "/modules",
   },
