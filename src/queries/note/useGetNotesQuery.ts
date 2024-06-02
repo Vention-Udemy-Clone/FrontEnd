@@ -4,7 +4,7 @@ import request from "@/lib/request";
 import { GetNotesResponse } from "@/types/lesson.types";
 import { useQuery } from "@tanstack/react-query";
 
-function useGetNotesQuery(lessonId: string) {
+function useGetNotesQuery(lessonId: string, userId: string | undefined) {
   return useQuery({
     queryKey: [QUERY_KEYS.query.note.notes, lessonId],
     queryFn: async () => {
@@ -12,6 +12,7 @@ function useGetNotesQuery(lessonId: string) {
 
       return data.data;
     },
+    enabled: !!userId,
   });
 }
 

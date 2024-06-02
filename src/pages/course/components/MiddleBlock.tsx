@@ -2,6 +2,7 @@ import Tiptap from "@/components/Tiptap";
 import { Separator } from "@/components/ui/separator";
 import useGetLessonQuery from "@/queries/course/useGetLessonQuery";
 import useGetSummaryQuery from "@/queries/summary/useGetSummaryQuery";
+import { useUserStore } from "@/store/userStore";
 import { useParams } from "react-router-dom";
 import LessonQuizModal from "./LessonQuizModal";
 import { LessonSummary } from "./LessonSummary";
@@ -14,7 +15,8 @@ export const MiddleBlock = ({
   const { lessonId } = useParams();
   const { isPending, data: lesson, isError } = useGetLessonQuery(lessonId as string);
 
-  const { data: summary } = useGetSummaryQuery(lessonId as string);
+  const user = useUserStore((state) => state.user);
+  const { data: summary } = useGetSummaryQuery(lessonId as string, user.id);
 
   // ! Make a Skeleton component to show a loading state
   if (isPending) return <div className="grow">Loading...</div>;
@@ -54,12 +56,12 @@ export const MiddleBlock = ({
           {/* <div dangerouslySetInnerHTML={{ __html: lesson.content }}></div> */}
           <h3 className="mb-1 text-sm font-bold text-primary">Content:</h3>
           <div className="mb-5">
-            <FinalTiptap lesson={lesson.content} />
+            <FinalTiptap lesson={lesson.content} userId={user.id} />
           </div>
           {/* </div> */}
         </div>
       </div>
-      <LessonSummary summary={summary} />
+      {user.id && <LessonSummary summary={summary} />}
       <LessonQuizModal lessonId={lessonId as string} />
     </div>
   );

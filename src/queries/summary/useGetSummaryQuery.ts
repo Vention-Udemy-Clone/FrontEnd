@@ -4,7 +4,7 @@ import request from "@/lib/request";
 import { SummaryCreateResponse } from "@/types/summary.types";
 import { useQuery } from "@tanstack/react-query";
 
-function useGetSummaryQuery(lessonId: string) {
+function useGetSummaryQuery(lessonId: string, userId: string | undefined) {
   return useQuery({
     queryKey: [QUERY_KEYS.query.summary.summary, lessonId],
     queryFn: async () => {
@@ -14,6 +14,7 @@ function useGetSummaryQuery(lessonId: string) {
 
       return data.data;
     },
+    enabled: !!userId,
   });
 }
 

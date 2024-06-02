@@ -101,7 +101,7 @@ const extensions = [
 
 const MAX_CHARACTERS = 256;
 
-export const FinalTiptap = ({ lesson }: { lesson: string }) => {
+export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: string }) => {
   const [showNotes, setShowNotes] = useState(true);
   const [clickedPosition, setClickedPosition] = useState<{ x: number; y: number } | null>(null);
   const parentRef = useRef<HTMLDivElement>(null);
@@ -114,7 +114,7 @@ export const FinalTiptap = ({ lesson }: { lesson: string }) => {
   const remainingCharacters = MAX_CHARACTERS - noteCreationText.length;
   const { lessonId } = useParams();
 
-  const { data, isLoading } = useGetNotesQuery(lessonId as string);
+  const { data, isLoading } = useGetNotesQuery(lessonId as string, userId);
 
   const editor = useEditor({
     extensions,
@@ -279,16 +279,18 @@ export const FinalTiptap = ({ lesson }: { lesson: string }) => {
         className=" underline-offset-3 font-mon2 relative mb-5 whitespace-pre-wrap rounded-xl  text-sm text-gray-900 decoration-[#0fd9ffba4]  dark:text-gray-200"
         ref={parentRef}
       >
-        <div className="mb-1 flex justify-end">
-          <div
-            className="cursor-pointer px-3"
-            onClick={() => {
-              setShowNotes((prev) => !prev);
-            }}
-          >
-            {showNotes ? <Eraser size={22} strokeWidth={2} /> : <Highlighter size={22} />}
+        {userId && (
+          <div className="mb-1 flex justify-end">
+            <div
+              className="cursor-pointer px-3"
+              onClick={() => {
+                setShowNotes((prev) => !prev);
+              }}
+            >
+              {showNotes ? <Eraser size={22} strokeWidth={2} /> : <Highlighter size={22} />}
+            </div>
           </div>
-        </div>
+        )}
         <EditorContent
           className="whitespace-pre-wrap"
           editor={editor}
@@ -302,88 +304,90 @@ export const FinalTiptap = ({ lesson }: { lesson: string }) => {
           }}
         />
 
-        <BubbleMenu
-          className={`${showNotes ? "" : "hidden "}max-w-[466px] rounded border bg-background p-0.5 shadow-lg`}
-          shouldShow={({ state }) => {
-            const hasSelection = !state.selection.empty;
+        {userId && (
+          <BubbleMenu
+            className={`${showNotes ? "" : "hidden "}max-w-[466px] rounded border bg-background p-0.5 shadow-lg`}
+            shouldShow={({ state }) => {
+              const hasSelection = !state.selection.empty;
 
-            let show: boolean = true;
-            const selection = state.selection;
-            state.doc.nodesBetween(selection.from, selection.to, (node) => {
-              if (
-                node.type.name === "text" &&
-                node.marks.some((mark) => mark.type.name === "highlight")
-              ) {
-                show = false;
-              }
-            });
+              let show: boolean = true;
+              const selection = state.selection;
+              state.doc.nodesBetween(selection.from, selection.to, (node) => {
+                if (
+                  node.type.name === "text" &&
+                  node.marks.some((mark) => mark.type.name === "highlight")
+                ) {
+                  show = false;
+                }
+              });
 
-            return hasSelection && show;
-          }}
-          editor={editor}
-        >
-          <div className="flex items-center gap-1 rounded ">
-            {!showBubbleMenu && (
-              <Button
-                variant={"ghost"}
-                size={"icon"}
-                onClick={() => {
-                  createNote(false);
-                }}
-              >
-                <Highlighter strokeWidth={1.5} />
-              </Button>
-            )}
+              return hasSelection && show;
+            }}
+            editor={editor}
+          >
+            <div className="flex items-center gap-1 rounded ">
+              {!showBubbleMenu && (
+                <Button
+                  variant={"ghost"}
+                  size={"icon"}
+                  onClick={() => {
+                    createNote(false);
+                  }}
+                >
+                  <Highlighter strokeWidth={1.5} />
+                </Button>
+              )}
 
-            <Popover>
-              <PopoverTrigger>
-                {!showBubbleMenu && (
-                  <Button
-                    variant={"ghost"}
-                    size={"icon"}
-                    className="p-0"
-                    onClick={() => {
-                      setShowBubbleMenu(true);
-                    }}
-                  >
-                    <NotebookPen strokeWidth={1.5} size={24} />
-                  </Button>
-                )}
-                {null}
-              </PopoverTrigger>
-              <PopoverContent className="p-2">
-                <div className="max-w-[466px] rounded-xl border bg-background p-2">
-                  <Textarea
-                    rows={noteCreationText.length / 35}
-                    className="mb-2 w-[450px] max-[520px]:w-[250px]"
-                    placeholder="Add note here..."
-                    value={noteCreationText || ""}
-                    onChange={(e) => {
-                      setNoteCreationText(e.target.value);
-                    }}
-                    autoFocus
-                    maxLength={MAX_CHARACTERS}
-                  ></Textarea>
-
-                  <div className="flex items-center justify-between gap-4 text-sm text-foreground">
-                    {remainingCharacters >= 0
-                      ? `${remainingCharacters} characters left`
-                      : "Maximum characters exceeded"}
-
+              <Popover>
+                <PopoverTrigger>
+                  {!showBubbleMenu && (
                     <Button
-                      className="h-7"
+                      variant={"ghost"}
+                      size={"icon"}
+                      className="p-0"
                       onClick={() => {
-                        createNote(true);
+                        setShowBubbleMenu(true);
                       }}
                     >
-                      Save
+                      <NotebookPen strokeWidth={1.5} size={24} />
                     </Button>
+                  )}
+                  {null}
+                </PopoverTrigger>
+                <PopoverContent className="p-2">
+                  <div className="max-w-[466px] rounded-xl border bg-background p-2">
+                    <Textarea
+                      rows={noteCreationText.length / 35}
+                      className="mb-2 w-[450px] max-[520px]:w-[250px]"
+                      placeholder="Add note here..."
+                      value={noteCreationText || ""}
+                      onChange={(e) => {
+                        setNoteCreationText(e.target.value);
+                      }}
+                      autoFocus
+                      maxLength={MAX_CHARACTERS}
+                    ></Textarea>
+
+                    <div className="flex items-center justify-between gap-4 text-sm text-foreground">
+                      {remainingCharacters >= 0
+                        ? `${remainingCharacters} characters left`
+                        : "Maximum characters exceeded"}
+
+                      <Button
+                        className="h-7"
+                        onClick={() => {
+                          createNote(true);
+                        }}
+                      >
+                        Save
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </PopoverContent>
-            </Popover>
-          </div>
-        </BubbleMenu>
+                </PopoverContent>
+              </Popover>
+            </div>
+          </BubbleMenu>
+        )}
 
         {clickedPosition && (
           <div
