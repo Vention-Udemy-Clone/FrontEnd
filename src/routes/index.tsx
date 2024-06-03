@@ -6,6 +6,7 @@ import { CoursePage } from "@/pages/course/CoursePage";
 import { MentorCourses } from "@/pages/MentorCourses";
 import { GenerateCourse } from "@/pages/MentorCourses/GenerateCourse";
 import { MentorCoursePage } from "@/pages/MentorCourses/MentorCoursePage";
+import { LearningPath } from "@/pages/learning-path";
 
 const routes = createBrowserRouter([
   //public routes
@@ -23,6 +24,11 @@ const routes = createBrowserRouter([
     path: "/course/:id/module/:moduleId/lesson/:lessonId",
     element: <MainLayout />,
     children: [{ index: true, element: <CoursePage /> }],
+  },
+  {
+    path: "/learning-path",
+    element: <MainLayout />,
+    children: [{ index: true, element: <LearningPath /> }],
   },
   {
     path: "/my-courses",

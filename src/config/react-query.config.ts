@@ -32,5 +32,6 @@ export const QUERY_KEYS = {
     summary: {
       summary: "summary",
     },
+    learningPath: "learning-path",
   },
 } as const;

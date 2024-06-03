@@ -33,4 +33,5 @@ export const ENDPOINTS = {
   module: {
     root: "/modules",
   },
+  learningPath: "/learning-path",
 } as const;
