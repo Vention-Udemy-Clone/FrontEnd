@@ -304,90 +304,91 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
           }}
         />
 
-        {userId && (
-          <BubbleMenu
-            className={`${showNotes ? "" : "hidden "}max-w-[466px] rounded border bg-background p-0.5 shadow-lg`}
-            shouldShow={({ state }) => {
-              const hasSelection = !state.selection.empty;
+        <BubbleMenu
+          children={
+            userId ? (
+              <div className="flex items-center gap-1 rounded ">
+                {!showBubbleMenu && (
+                  <Button
+                    variant={"ghost"}
+                    size={"icon"}
+                    onClick={() => {
+                      createNote(false);
+                    }}
+                  >
+                    <Highlighter strokeWidth={1.5} />
+                  </Button>
+                )}
 
-              let show: boolean = true;
-              const selection = state.selection;
-              state.doc.nodesBetween(selection.from, selection.to, (node) => {
-                if (
-                  node.type.name === "text" &&
-                  node.marks.some((mark) => mark.type.name === "highlight")
-                ) {
-                  show = false;
-                }
-              });
-
-              return hasSelection && show;
-            }}
-            editor={editor}
-          >
-            <div className="flex items-center gap-1 rounded ">
-              {!showBubbleMenu && (
-                <Button
-                  variant={"ghost"}
-                  size={"icon"}
-                  onClick={() => {
-                    createNote(false);
-                  }}
-                >
-                  <Highlighter strokeWidth={1.5} />
-                </Button>
-              )}
-
-              <Popover>
-                <PopoverTrigger>
-                  {!showBubbleMenu && (
-                    <Button
-                      variant={"ghost"}
-                      size={"icon"}
-                      className="p-0"
-                      onClick={() => {
-                        setShowBubbleMenu(true);
-                      }}
-                    >
-                      <NotebookPen strokeWidth={1.5} size={24} />
-                    </Button>
-                  )}
-                  {null}
-                </PopoverTrigger>
-                <PopoverContent className="p-2">
-                  <div className="max-w-[466px] rounded-xl border bg-background p-2">
-                    <Textarea
-                      rows={noteCreationText.length / 35}
-                      className="mb-2 w-[450px] max-[520px]:w-[250px]"
-                      placeholder="Add note here..."
-                      value={noteCreationText || ""}
-                      onChange={(e) => {
-                        setNoteCreationText(e.target.value);
-                      }}
-                      autoFocus
-                      maxLength={MAX_CHARACTERS}
-                    ></Textarea>
-
-                    <div className="flex items-center justify-between gap-4 text-sm text-foreground">
-                      {remainingCharacters >= 0
-                        ? `${remainingCharacters} characters left`
-                        : "Maximum characters exceeded"}
-
+                <Popover>
+                  <PopoverTrigger>
+                    {!showBubbleMenu && (
                       <Button
-                        className="h-7"
+                        variant={"ghost"}
+                        size={"icon"}
+                        className="p-0"
                         onClick={() => {
-                          createNote(true);
+                          setShowBubbleMenu(true);
                         }}
                       >
-                        Save
+                        <NotebookPen strokeWidth={1.5} size={24} />
                       </Button>
+                    )}
+                    {null}
+                  </PopoverTrigger>
+                  <PopoverContent className="p-2">
+                    <div className="max-w-[466px] rounded-xl border bg-background p-2">
+                      <Textarea
+                        rows={noteCreationText.length / 35}
+                        className="mb-2 w-[450px] max-[520px]:w-[250px]"
+                        placeholder="Add note here..."
+                        value={noteCreationText || ""}
+                        onChange={(e) => {
+                          setNoteCreationText(e.target.value);
+                        }}
+                        autoFocus
+                        maxLength={MAX_CHARACTERS}
+                      ></Textarea>
+
+                      <div className="flex items-center justify-between gap-4 text-sm text-foreground">
+                        {remainingCharacters >= 0
+                          ? `${remainingCharacters} characters left`
+                          : "Maximum characters exceeded"}
+
+                        <Button
+                          className="h-7"
+                          onClick={() => {
+                            createNote(true);
+                          }}
+                        >
+                          Save
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </PopoverContent>
-              </Popover>
-            </div>
-          </BubbleMenu>
-        )}
+                  </PopoverContent>
+                </Popover>
+              </div>
+            ) : null
+          }
+          className={`${showNotes ? "" : "hidden "}max-w-[466px] rounded border bg-background p-0.5 shadow-lg`}
+          shouldShow={({ state }) => {
+            const hasSelection = !state.selection.empty;
+
+            let show: boolean = true;
+            const selection = state.selection;
+            state.doc.nodesBetween(selection.from, selection.to, (node) => {
+              if (
+                node.type.name === "text" &&
+                node.marks.some((mark) => mark.type.name === "highlight")
+              ) {
+                show = false;
+              }
+            });
+
+            return hasSelection && show;
+          }}
+          editor={editor}
+        />
 
         {clickedPosition && (
           <div
