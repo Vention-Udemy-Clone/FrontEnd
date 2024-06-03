@@ -112,10 +112,15 @@ function GoogleLoginButton() {
                   <span>Settings</span>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
-              <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <Link to="/my-courses">
                   <DropdownMenuItem>My Courses</DropdownMenuItem>
+                </Link>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <Link to="/learning-path">
+                  <DropdownMenuItem>Learning Path</DropdownMenuItem>
                 </Link>
               </DropdownMenuGroup>
 

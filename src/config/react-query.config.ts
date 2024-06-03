@@ -26,5 +26,6 @@ export const QUERY_KEYS = {
     lessons: {
       lesson: "mylesson",
     },
+    learningPath: "learning-path",
   },
 } as const;

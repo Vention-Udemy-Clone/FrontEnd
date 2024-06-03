@@ -2,6 +2,7 @@ import { BookmarkIcon } from "@radix-ui/react-icons";
 
 import { cn } from "@/lib/utils";
 import { Course } from "@/types/course.types";
+import clsx from "clsx";
 
 type Props = {
   course: Course;
@@ -25,7 +26,7 @@ export const CourseCard = ({ course, noHover }: Props) => {
     >
       <div>
         <img
-          alt="courseimage "
+          alt="courseImage "
           className="h-40 w-full object-cover"
           src="https://jakeer.vercel.app/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fjakeer-cloudinary%2Fimage%2Fupload%2Fq_50%2Cf_auto%2Cc_fill%2Car_5%3A2%2Cw_1200%2Fbanner%2Fgeometry&w=3840&q=75"
         />
@@ -44,7 +45,7 @@ export const CourseCard = ({ course, noHover }: Props) => {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <img
-              alt="authorimage"
+              alt="authorImage"
               src={avatarUrl || "https://picsum.photos/200"}
               className="h-8 w-8 shrink-0 rounded-full"
             />
@@ -53,7 +54,15 @@ export const CourseCard = ({ course, noHover }: Props) => {
             </div>
           </div>
 
-          <p className="ml-auto text-xs/3 font-bold text-primary">{level}</p>
+          <p
+            className={clsx("ml-auto rounded-sm bg-primary px-2 py-1 text-[10px] text-background", {
+              "bg-teal-500": level === "BEGINNER",
+              "bg-sky-500": level === "INTERMEDIATE",
+              "bg-violet-500": level === "ADVANCED",
+            })}
+          >
+            {level}
+          </p>
         </div>
       </div>
     </div>
