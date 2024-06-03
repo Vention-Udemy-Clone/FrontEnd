@@ -40,3 +40,39 @@ export type GenerateLessonTextsResponse = {
     text: string;
   };
 };
+
+export type NoteCreateRequest = {
+  note: string;
+  originalText: string;
+  from: string;
+  to: string;
+  lessonId: string;
+};
+
+export type NoteDeleteRequest = {
+  id: string;
+};
+
+export type NoteUpdateRequest = {
+  id: string;
+  note: string;
+};
+
+export type Note = {
+  id: string;
+  note: string;
+  originalText: string;
+  from: string;
+  to: string;
+  lessonId: string;
+};
+
+export type NoteCreateResponse = {
+  success: boolean;
+  data: Note;
+};
+
+export type GetNotesResponse = {
+  success: boolean;
+  data: Note[];
+};

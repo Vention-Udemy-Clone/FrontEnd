@@ -20,6 +20,16 @@ export const ENDPOINTS = {
     getQuiz: (lessonId: string) => `/quiz/${lessonId}`,
     chat: (lessonId: string) => `lessons/${lessonId}/chat`,
   },
+  note: {
+    root: "/notes",
+    listNotes: (lessonId: string) => `/notes/${lessonId}`,
+    oneNote: (noteId: string) => `/notes/${noteId}`,
+  },
+  summary: {
+    root: "summary",
+    oneSummary: (summaryId: string) => `/summary/${summaryId}`,
+    generateSummary: (lessonId: string) => `/summary/generate/${lessonId}`,
+  },
   module: {
     root: "/modules",
   },
