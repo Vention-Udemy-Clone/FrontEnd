@@ -63,9 +63,9 @@ const LessonQuizModal = (props: QuizProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex justify-end">
-          <Button className="rounded-sm" variant={"default"}>
-            Generate a Self-Quiz with AI
+        <div className="flex">
+          <Button className="rounded-sm" size={"sm"} variant={"outline"}>
+            Generate Quiz
           </Button>
         </div>
       </DialogTrigger>

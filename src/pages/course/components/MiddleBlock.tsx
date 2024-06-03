@@ -54,15 +54,16 @@ export const MiddleBlock = ({
           </div>
           {/* <div className="mb-5 whitespace-pre-wrap rounded-xl border p-3 text-sm text-muted-foreground dark:text-gray-200"> */}
           {/* <div dangerouslySetInnerHTML={{ __html: lesson.content }}></div> */}
-          <h3 className="mb-1 text-sm font-bold text-primary">Content:</h3>
           <div className="mb-5">
             <FinalTiptap lesson={lesson.content} userId={user.id} />
           </div>
           {/* </div> */}
         </div>
       </div>
-      {user.id && <LessonSummary summary={summary} />}
+
       <LessonQuizModal lessonId={lessonId as string} />
+      <Separator className="my-6" />
+      {user.id && <LessonSummary summary={summary} />}
     </div>
   );
 };

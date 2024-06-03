@@ -88,11 +88,11 @@ export const LessonSummary = ({
                 setIsSummaryEditing((prev) => !prev);
               }}
             >
-              <SquarePen />
+              <SquarePen className="text-gray-500" size={"20px"} />
             </div>
 
             <div className="cursor-pointer " onClick={handleDelete}>
-              <FileX2 />
+              <FileX2 className="text-gray-500" size={"20px"} />
             </div>
           </div>
         ) : (
@@ -116,7 +116,7 @@ export const LessonSummary = ({
               }}
               disabled={isSummaryGenerating}
             >
-              Generate by AI
+              Summarize by AI
             </Button>
 
             <Button disabled={isSummaryGenerating} size={"sm"} onClick={handleEdit}>

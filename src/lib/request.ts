@@ -4,7 +4,7 @@ import { getValueFromLocalStorage } from "./utils";
 
 export const request = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  timeout: 15000, // 15 seconds
+  timeout: 25000, // 15 seconds
 });
 
 request.interceptors.request.use(

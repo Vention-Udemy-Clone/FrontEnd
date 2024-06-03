@@ -46,10 +46,9 @@ export const AiChat = () => {
   return (
     <Drawer open={isOpen} onOpenChange={setOpen} direction="right">
       <DrawerTrigger
-        className="fixed bottom-10 right-10 flex items-center justify-center gap-2 rounded border bg-muted px-4 py-3 shadow hover:bg-muted/95"
+        className="fixed bottom-10 right-10 flex items-center justify-center gap-2 rounded border bg-muted px-4 py-3 shadow hover:bg-background"
         onClick={openModal}
       >
-        <p>Ask AI</p>
         <Bot />
       </DrawerTrigger>
 

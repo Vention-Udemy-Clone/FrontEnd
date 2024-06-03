@@ -280,14 +280,20 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
         ref={parentRef}
       >
         {userId && (
-          <div className="mb-1 flex justify-end">
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-sm font-bold text-primary">Content:</h3>
+
             <div
               className="cursor-pointer px-3"
               onClick={() => {
                 setShowNotes((prev) => !prev);
               }}
             >
-              {showNotes ? <Eraser size={22} strokeWidth={2} /> : <Highlighter size={22} />}
+              {showNotes ? (
+                <Eraser className="text-gray-500" size={20} strokeWidth={2} />
+              ) : (
+                <Highlighter className="text-gray-500" size={20} />
+              )}
             </div>
           </div>
         )}
