@@ -88,10 +88,10 @@ export const InputForm = ({
         </div>
       ) : (
         <Button
-          disabled={loading}
-          className="h-7 border text-primary hover:bg-primary hover:text-white"
-          variant={"outline"}
           type="button"
+          className="h-7"
+          disabled={loading}
+          variant={"outline"}
           onClick={() => {
             setIsAiGenerationOpen(true);
           }}

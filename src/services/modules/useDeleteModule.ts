@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 import { ENDPOINTS } from "@/config/endpoints.config";
 import { QUERY_KEYS } from "@/config/react-query.config";
@@ -14,6 +15,7 @@ export const useDeleteModule = () => {
     },
 
     onSuccess: async () => {
+      toast.success("Module deleted successfully");
       await queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.query.courses.mycourse, id],
       });

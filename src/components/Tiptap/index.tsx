@@ -3,6 +3,7 @@ import Underline from "@tiptap/extension-underline";
 import { BubbleMenu, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
+import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { BubbleContext } from "./BubbleContext";
 
@@ -10,10 +11,11 @@ type Props = {
   content?: string;
   editable?: boolean;
   placeholder?: string;
+  className?: string;
   onChange: (htmlContent: string) => void;
 };
 
-const Tiptap = ({ content, editable, placeholder, onChange }: Props) => {
+const Tiptap = ({ content, editable, className, placeholder, onChange }: Props) => {
   const [cursorPosition, setCursorPosition] = useState<number>(0);
 
   const editor = useEditor({
@@ -37,8 +39,10 @@ const Tiptap = ({ content, editable, placeholder, onChange }: Props) => {
     ],
     editorProps: {
       attributes: {
-        class:
-          "min-h-20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border rounded p-2",
+        class: cn(
+          "min-h-40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border rounded p-2",
+          className
+        ),
       },
     },
   });

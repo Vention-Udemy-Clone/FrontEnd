@@ -183,7 +183,6 @@ export const LessonForm = ({
                 />
               </div>
               <FormControl>
-                {/* <Textarea disabled={isOverviewLoading} rows={4} {...field} /> */}
                 <Tiptap
                   content={field.value}
                   onChange={field.onChange}
@@ -217,7 +216,6 @@ export const LessonForm = ({
                 />
               </div>
               <FormControl>
-                {/* <Textarea disabled={isContentLoading} rows={8} {...field} /> */}
                 <Tiptap
                   content={field.value}
                   onChange={field.onChange}

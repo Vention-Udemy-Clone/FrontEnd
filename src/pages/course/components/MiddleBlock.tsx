@@ -51,23 +51,17 @@ export const MiddleBlock = ({
               <h1 className="mb-3 font-semibold max-[500px]:text-sm">{lesson.title}</h1>
               <Separator orientation="horizontal" className="mb-3" />
               <h3 className="mb-1 text-sm font-bold text-primary">Overview:</h3>
-              {/* <p
-                dangerouslySetInnerHTML={{ __html: lesson.overview }}
-                className="whitespace-pre-wrap text-sm font-medium max-[500px]:text-xs"
-              ></p> */}
               <Tiptap
                 editable={false}
                 content={lesson.overview}
+                className="min-h-fit border-0"
                 onChange={(htmlContent) => console.log(htmlContent)}
               />
             </div>
           </div>
-          {/* <div className="mb-5 whitespace-pre-wrap rounded-xl border p-3 text-sm text-muted-foreground dark:text-gray-200"> */}
-          {/* <div dangerouslySetInnerHTML={{ __html: lesson.content }}></div> */}
           <div className="mb-5">
             <FinalTiptap lesson={lesson.content} userId={user.id} />
           </div>
-          {/* </div> */}
         </div>
       </div>
 

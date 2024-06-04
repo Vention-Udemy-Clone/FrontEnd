@@ -134,6 +134,7 @@ export const LessonSummary = ({
       ) : (
         <div className="mb-3 rounded-md text-sm">
           <Tiptap
+            className="min-h-20"
             content={
               isSummaryEditing
                 ? isSummaryGenerating

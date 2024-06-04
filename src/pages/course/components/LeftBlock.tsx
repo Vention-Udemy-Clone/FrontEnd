@@ -89,7 +89,7 @@ export const LeftBlock = ({
           collapsible
         >
           <AccordionItem className="mb-2 rounded-xl border " value={module.id}>
-            <AccordionTrigger className=" rounded-[16px] border-none px-2 py-3 hover:bg-[#edf1f2] hover:no-underline data-[state=open]:bg-[#edf1f2] dark:hover:bg-gray-800  data-[state=open]:dark:bg-gray-800">
+            <AccordionTrigger className=" rounded-xl border-none px-2 py-3 hover:bg-[#edf1f2] hover:no-underline data-[state=open]:bg-[#edf1f2] dark:hover:bg-gray-800  data-[state=open]:dark:bg-gray-800">
               <div className="flex items-center justify-center gap-3 pl-2">
                 <Checkbox
                   onClick={handleCheckboxClick}
@@ -97,7 +97,7 @@ export const LeftBlock = ({
                 />
 
                 <div className="text-left">
-                  <p className="text-xs text-gray-500"> Module {i}</p>
+                  <p className="text-xs text-gray-500"> Module {i + 1}</p>
                   <p className="line-clamp-2 text-xs font-medium">{module.title}</p>
                 </div>
               </div>

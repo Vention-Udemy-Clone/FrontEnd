@@ -5,6 +5,7 @@ import useCreateNoteMutation from "@/mutations/useCreateNoteMutation";
 import useDeleteNoteMutation from "@/mutations/useDeleteNoteMutation";
 import useUpdateNoteMutation from "@/mutations/useUpdateNoteMutation";
 import useGetNotesQuery from "@/queries/note/useGetNotesQuery";
+import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 import { Mark } from "@tiptap/core";
 import TextStyle from "@tiptap/extension-text-style";
@@ -279,26 +280,19 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
         className=" underline-offset-3 font-mon2 relative mb-5 whitespace-pre-wrap rounded-xl  text-sm text-gray-900 decoration-[#0fd9ffba4]  dark:text-gray-200"
         ref={parentRef}
       >
-        {userId && (
-          <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-sm font-bold text-primary">Content:</h3>
+        <div className="mb-2 flex items-center justify-between">
+          <h3 className="text-sm font-bold text-primary">Content:</h3>
 
-            <div
-              className="cursor-pointer px-3"
-              onClick={() => {
-                setShowNotes((prev) => !prev);
-              }}
-            >
-              {showNotes ? (
-                <Eraser className="text-gray-500" size={20} strokeWidth={2} />
-              ) : (
-                <Highlighter className="text-gray-500" size={20} />
-              )}
+          {userId && (
+            <div>
+              <Button size="icon" variant="ghost" onClick={() => setShowNotes((prev) => !prev)}>
+                {showNotes ? <EyeOpenIcon /> : <EyeClosedIcon />}
+              </Button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
         <EditorContent
-          className="whitespace-pre-wrap"
+          className="whitespace-pre-wrap p-2"
           editor={editor}
           onClick={(e) => {
             const target = e.target as Element;
@@ -330,8 +324,8 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
                   <PopoverTrigger>
                     {!showBubbleMenu && (
                       <Button
-                        variant={"ghost"}
                         size={"icon"}
+                        variant={"ghost"}
                         className="p-0"
                         onClick={() => {
                           setShowBubbleMenu(true);
@@ -356,10 +350,14 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
                         maxLength={MAX_CHARACTERS}
                       ></Textarea>
 
-                      <div className="flex items-center justify-between gap-4 text-sm text-foreground">
-                        {remainingCharacters >= 0
-                          ? `${remainingCharacters} characters left`
-                          : "Maximum characters exceeded"}
+                      <div className="flex items-center justify-between gap-4 text-xs text-foreground">
+                        {remainingCharacters >= 0 ? (
+                          <div>
+                            <span className="font-bold">Limit:</span> {remainingCharacters}
+                          </div>
+                        ) : (
+                          "Maximum characters exceeded"
+                        )}
 
                         <Button
                           className="h-7"
@@ -406,21 +404,21 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
           >
             {noteText !== "" ? (
               <>
-                <div className="mb-1 flex h-7 items-center justify-between gap-10 px-2 pt-2">
+                <div className="flex items-center justify-between gap-10 p-0.5">
                   <Button
+                    size="icon"
                     variant={"ghost"}
-                    className=" h-7 p-0 text-primary hover:bg-background"
                     onClick={() => {
                       setClickedPosition(null);
                     }}
                   >
-                    <ChevronLeft />
+                    <ChevronLeft className="text-primary" />
                   </Button>
                   {!isNoteEditing && (
-                    <div className="flex h-7 gap-1">
+                    <div className="flex items-center gap-1">
                       <Button
+                        size="icon"
                         variant={"ghost"}
-                        className=" h-7 w-7 rounded-full p-0 hover:bg-background "
                         onClick={() => {
                           setNoteCreationText(noteText || "");
                           setIsNoteEditing(true);
@@ -429,8 +427,9 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
                         <PencilLine className="m-auto" size={20} />
                       </Button>
                       <Button
+                        size="icon"
                         variant={"ghost"}
-                        className="h-7 w-7 rounded-full  p-0 hover:bg-background"
+                        // className="h-7 w-7 rounded-full  p-0 hover:bg-background"
                         onClick={() => {
                           if (!lessonId) return;
                           deleteNote(
@@ -464,9 +463,8 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
             ) : (
               <div className="p-0.5">
                 <Button
-                  variant={"ghost"}
                   size={"icon"}
-                  className="h-7 w-10 p-0 hover:bg-background "
+                  variant={"ghost"}
                   onClick={() => {
                     if (!lessonId) return;
                     deleteNote(
@@ -509,10 +507,14 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
                   maxLength={MAX_CHARACTERS}
                 ></Textarea>
 
-                <div className="flex justify-between text-sm text-foreground">
-                  {remainingCharacters >= 0
-                    ? `${remainingCharacters} characters left`
-                    : "Maximum characters exceeded"}
+                <div className="flex items-center justify-between text-xs text-foreground">
+                  {remainingCharacters >= 0 ? (
+                    <div>
+                      <span className="font-bold">Limit:</span> {remainingCharacters}
+                    </div>
+                  ) : (
+                    "Maximum characters exceeded"
+                  )}
 
                   <Button
                     className="h-7"
@@ -539,9 +541,11 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
                 </div>
               </div>
             ) : (
-              <div className="px-3 pb-3 pt-1">
-                {noteText && <div className="text-sm text-foreground">{noteText}</div>}
-              </div>
+              noteText && (
+                <div className="px-3 pb-3 pt-1">
+                  <div className="text-sm text-foreground">{noteText}</div>
+                </div>
+              )
             )}
           </div>
         )}

@@ -21,7 +21,7 @@ export const CourseCard = ({ course, noHover }: Props) => {
   return (
     <div
       className={cn(
-        "mx-auto flex h-full max-w-[400px] flex-grow flex-col overflow-hidden rounded-lg border bg-background transition-all sm:mx-0 sm:max-w-none",
+        "mx-auto flex min-h-[366px] max-w-[400px] flex-col overflow-hidden rounded-lg border bg-background transition-all sm:mx-0 sm:max-w-none",
         { "hover:-translate-y-2 hover:cursor-pointer hover:shadow-md": !noHover }
       )}
     >

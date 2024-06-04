@@ -102,7 +102,7 @@ export const MentorCoursePage = () => {
                             <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md  hover:bg-accent">
                               <DotsHorizontalIcon />
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
+                            <DropdownMenuContent align="start">
                               <DropdownMenuItem onClick={() => setModuleEdit(content.id)}>
                                 Edit
                               </DropdownMenuItem>
@@ -111,8 +111,9 @@ export const MentorCoursePage = () => {
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
-                          <AccordionTrigger className="px-2 py-0 text-start  hover:no-underline">
-                            {content.title} {`[${content.lessons.length}]`}
+                          <AccordionTrigger className="px-2 py-0 text-start hover:no-underline">
+                            {content.title}{" "}
+                            {content.lessons.length !== 0 ? ` [${content.lessons.length}]` : ""}
                           </AccordionTrigger>
                         </div>
                         <AccordionContent className="px-3">

@@ -9,7 +9,7 @@ import SvgIcon from "../SvgIcon";
 
 export const Header = () => {
   return (
-    <header className="sticky left-0 top-0 z-50 border-b bg-background">
+    <header className="sticky inset-0 z-50 border-b bg-background">
       <div className="container flex items-center justify-between py-2">
         <Link to="/">
           <SvgIcon name="logo" className="h-8 w-16 text-foreground" />
