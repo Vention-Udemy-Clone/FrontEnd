@@ -38,6 +38,7 @@ export type Course = {
   level: Level;
   createdAt: string;
   updatedAt: string;
+  bgImageUrl: string;
   author: {
     id: string;
     fullName: string;
@@ -96,6 +97,7 @@ export type CourseData = {
   status: Status;
   title: string;
   updatedAt: string;
+  bgImageUrl: string;
 };
 
 export type CourseResponse = {

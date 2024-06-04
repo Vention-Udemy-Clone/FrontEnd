@@ -150,7 +150,7 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
         .setMark("highlight", {
           noteText: note.note,
           id: note.id,
-          class: `${note.note ? "underline hover:bg-[#5553ff3d] hover:dark:bg-[#782168ab]  " : "bg-[#fef9c3] dark:bg-[#06a8e069] "}   cursor-pointer  inline hover:no-underline relative transition-all highlight decoration-[#5553ff7a] dark:decoration-[#782168] underline-offset-4 decoration-[1.5px] }`,
+          class: `${note.note ? "underline hover:bg-[#5553ff3d] hover:dark:bg-[#782168ab] " : "bg-[#fef9c3] dark:bg-[#32ff0952] "}   cursor-pointer  inline hover:no-underline relative transition-all highlight decoration-[#5553ff7a] dark:decoration-[#782168] underline-offset-4 decoration-[1.5px] }`,
           from: note.from,
           to: note.to,
         })
@@ -539,7 +539,9 @@ export const FinalTiptap = ({ lesson, userId }: { lesson: string; userId?: strin
                 </div>
               </div>
             ) : (
-              noteText && <div className="px-3 pb-2 text-sm text-foreground">{noteText}</div>
+              <div className="px-3 pb-3 pt-1">
+                {noteText && <div className="text-sm text-foreground">{noteText}</div>}
+              </div>
             )}
           </div>
         )}

@@ -15,6 +15,7 @@ export const CourseCard = ({ course, noHover }: Props) => {
     title,
     description,
     author: { fullName, avatarUrl },
+    bgImageUrl,
   } = course;
 
   return (
@@ -28,7 +29,10 @@ export const CourseCard = ({ course, noHover }: Props) => {
         <img
           alt="courseImage "
           className="h-40 w-full object-cover"
-          src="https://jakeer.vercel.app/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fjakeer-cloudinary%2Fimage%2Fupload%2Fq_50%2Cf_auto%2Cc_fill%2Car_5%3A2%2Cw_1200%2Fbanner%2Fgeometry&w=3840&q=75"
+          src={
+            bgImageUrl ||
+            "https://jakeer.vercel.app/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fjakeer-cloudinary%2Fimage%2Fupload%2Fq_50%2Cf_auto%2Cc_fill%2Car_5%3A2%2Cw_1200%2Fbanner%2Fgeometry&w=3840&q=75"
+          }
         />
       </div>
 

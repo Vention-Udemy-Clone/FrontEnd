@@ -9,8 +9,10 @@ import { LessonSummary } from "./LessonSummary";
 import { FinalTiptap } from "./LessonTiptap";
 export const MiddleBlock = ({
   activeLessonAndModule: { moduleNum, lessonNum },
+  bgImageUrl,
 }: {
   activeLessonAndModule: { moduleNum: string; lessonNum: string };
+  bgImageUrl: string;
 }) => {
   const { lessonId } = useParams();
   const { isPending, data: lesson, isError } = useGetLessonQuery(lessonId as string);
@@ -26,8 +28,16 @@ export const MiddleBlock = ({
     <div className="relative w-6/12 grow items-center justify-center px-4 max-[1100px]:px-0">
       <div className="group mb-4 h-[330px] overflow-hidden max-[700px]:h-[250px] max-[600px]:h-[170px] max-[550px]:hidden">
         <div className="absolute z-20 overflow-hidden"></div>
-        <div className="relative h-full w-full overflow-hidden rounded-xl bg-[url('https://picsum.photos/1920/1080')] bg-cover bg-center bg-no-repeat px-5 py-4 before:absolute  before:left-0 before:top-0 before:h-full before:w-full before:rounded-xl before:bg-gradient-24 before:from-primary before:from-10% before:via-transparent before:to-transparent before:transition-all before:duration-500 before:ease-linear before:content-[''] group-hover:before:-top-36 group-hover:before:scale-[2]"></div>
-        <div className="relative left-4 top-3 z-30 mb-[285px] mt-[-330px]  pr-8 font-bold transition-all duration-300 group-hover:-top-20 max-[700px]:mt-[-250px] max-[600px]:mt-[-175px]">
+        <div
+          className={`relative h-full w-full overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat  before:absolute  before:left-0 before:top-0 before:h-full before:w-full before:rounded-xl before:bg-gradient-24 before:from-primary before:from-[-10%] before:via-transparent before:to-transparent before:transition-all before:duration-500 before:ease-linear before:content-[''] group-hover:before:-top-36 group-hover:before:scale-[2]`}
+        >
+          <img
+            className="h-full w-full object-cover"
+            src={bgImageUrl || "https://picsum.photos/1920/1080"}
+            alt=""
+          />
+        </div>
+        <div className="relative left-4 top-3 z-30 mb-[285px] mt-[-330px] pr-8 font-bold transition-all duration-300 group-hover:-top-20 max-[700px]:mt-[-250px] max-[600px]:mt-[-175px]">
           <p className="text-xs text-gray-200 ">
             Module {moduleNum || 1} • Lesson {lessonNum || 1}
           </p>

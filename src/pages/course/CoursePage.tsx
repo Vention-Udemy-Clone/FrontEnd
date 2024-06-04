@@ -148,7 +148,7 @@ export const CoursePage = () => {
             </Drawer>
           </>
         )}
-        <MiddleBlock activeLessonAndModule={activeLessonAndModule} />
+        <MiddleBlock activeLessonAndModule={activeLessonAndModule} bgImageUrl={data.bgImageUrl} />
         {showPanels && (
           <>
             <RightBlock styles={" w-3/12 max-w-[380px] max-[1400px]:hidden "} course={data} />
