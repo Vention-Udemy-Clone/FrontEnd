@@ -26,6 +26,8 @@ import {
 } from "@/types/lesson.types";
 import { toast } from "sonner";
 import { InputForm } from "./InputForm";
+import QuizInput from "@/pages/MentorCourses/QuizInput";
+import { QuizPair } from "@/pages/MentorCourses/QuizInput";
 
 type Props = {
   moduleId: string;
@@ -49,7 +51,6 @@ export const LessonForm = ({
   const [isContentLoading, setIsContentLoading] = useState(false);
   const [isAiOverviewGenerationOpen, setIsAiOverviewGenerationOpen] = useState(false);
   const [isAiContentGenerationOpen, setIsAiContentGenerationOpen] = useState(false);
-
   const { mutate: overviewMutate } = useGenerateLessonTexts();
   const { mutate: contentMutate } = useGenerateLessonTexts();
 
@@ -57,6 +58,7 @@ export const LessonForm = ({
   const { updateLesson } = useUpdateLesson();
   const { deleteLesson } = useDeleteLesson();
   const [lesson, setLesson] = useState<Lesson | undefined>(undefined);
+  const [quizPairs, setQuizPairs] = useState<QuizPair[]>([]);
 
   const form = useForm<LessonRequest>({
     resolver: zodResolver(lessonSchema),
@@ -66,6 +68,16 @@ export const LessonForm = ({
       overview: lesson?.overview || "",
     },
     values: lesson,
+  });
+
+  const quizForm = useForm({
+    defaultValues: 
+      {
+        quiz: [{
+          question: "",
+          answer: ""
+        }]
+      },
   });
 
   const handleCancel = () => {
@@ -80,13 +92,14 @@ export const LessonForm = ({
   };
 
   const onSubmit = (data: LessonRequest) => {
+    console.log(data)
     if (lessonId) {
       updateLesson({ ...data, id: lessonId });
     } else {
       createLesson(data, {
         onSuccess(res) {
           setLesson(res.data.data);
-          setLessonCreation(false);
+          // setLessonCreation(false);
         },
       });
     }
@@ -145,7 +158,20 @@ export const LessonForm = ({
     );
   };
 
+  const handleQuizChange = (quizPairs: QuizPair[]) => {
+    quizForm.setValue("quiz", quizPairs);
+  };
+
+  const onQuizSubmit = (data) => {
+    console.log(data);
+  };
+
+  const handleQuizCancel = () => {
+    setQuizPairs([]);
+  };
+
   return (
+    <>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full flex-col space-y-3">
         <FormField
@@ -227,6 +253,7 @@ export const LessonForm = ({
             </FormItem>
           )}
         />
+
         <div className="flex items-center justify-between gap-1">
           <div className="space-x-2">
             <Button type="submit">{lessonId ? "Update" : "Create"}</Button>
@@ -246,5 +273,25 @@ export const LessonForm = ({
         </div>
       </form>
     </Form>
+      
+    {lessonId && (
+        <Form {...quizForm}>
+          <form onSubmit={quizForm.handleSubmit(onQuizSubmit)} className="flex w-full flex-col space-y-3">
+        <FormLabel>Quiz</FormLabel>
+        <QuizInput
+            maxQuestions={5}
+            lessonID={lessonId || ""}
+              onChange={handleQuizChange}
+              quizPairs={quizPairs}
+              setQuizPairs={setQuizPairs}
+          />
+            <Button type="submit">Save</Button>
+            <Button type="button" variant="secondary" onClick={handleQuizCancel}>
+              Discard
+            </Button>
+          </form>
+        </Form>
+      )}
+    </>
   );
 };
