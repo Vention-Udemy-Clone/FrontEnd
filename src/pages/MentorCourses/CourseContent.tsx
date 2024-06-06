@@ -24,6 +24,7 @@ export const CourseContent = ({ courseData }: Props) => {
       level: Level.BEGINNER,
       status: Status.DRAFT,
       authorId: user?.id || "",
+      bgImageUrl: courseData?.bgImageUrl || "",
     },
     values: courseData ? { ...courseData, authorId: user.id } : undefined,
   });
@@ -32,6 +33,7 @@ export const CourseContent = ({ courseData }: Props) => {
     id: "1",
     title: form.watch("title") || "Course Title",
     description: form.watch("description") || "Course Description",
+    bgImageUrl: form.watch("bgImageUrl") || "",
     level: form.watch("level"),
     status: form.watch("status"),
     Module: [],

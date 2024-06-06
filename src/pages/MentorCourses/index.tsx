@@ -1,3 +1,4 @@
+import { PlusIcon } from "@radix-ui/react-icons";
 import { Link } from "react-router-dom";
 
 import { CourseCard } from "@/components/course-card";
@@ -9,7 +10,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useGetMyCourses } from "@/services/courses/useGetMentorCourses";
 import { useUserStore } from "@/store/userStore";
@@ -42,20 +42,13 @@ export const MentorCourses = () => {
       <Separator className="my-4" />
       <div>
         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="grid min-h-80 place-content-center gap-2 rounded border border-primary p-4">
-            {/* Manual Creation */}
-            <Link to="create" className="flex justify-center">
-              <Button className="w-full">
-                <span className="ml-2">Create course</span>
-              </Button>
-            </Link>
-            {/* AI Generation */}
-            <Link to="generate" className="flex justify-center">
-              <Button className="w-full">
-                <span className="ml-2">Generate course (AI)</span>
-              </Button>
-            </Link>
-          </div>
+          <Link
+            to="create"
+            className="flex min-h-80 flex-col items-center justify-center rounded border border-primary p-4 text-primary hover:border-primary"
+          >
+            <PlusIcon className="mr-2 h-6 w-6" />
+            <span>Create a Course</span>
+          </Link>
           {courses.map((course) => (
             <Link key={course.id} to={course.id}>
               <CourseCard course={course} key={course.id} />

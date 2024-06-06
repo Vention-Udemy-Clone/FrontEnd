@@ -21,8 +21,8 @@ export const CourseCard = ({ course, noHover }: Props) => {
   return (
     <div
       className={cn(
-        "mx-auto flex min-h-[366px] max-w-[400px] flex-col overflow-hidden rounded-lg border bg-background transition-all sm:mx-0 sm:max-w-none",
-        { "hover:-translate-y-2 hover:cursor-pointer hover:shadow-md": !noHover }
+        "mx-auto flex min-h-96 max-w-[400px] flex-col overflow-hidden rounded-lg border bg-background transition-all sm:mx-0 sm:max-w-none",
+        { "h-full hover:-translate-y-2 hover:cursor-pointer hover:shadow-md": !noHover }
       )}
     >
       <div>
@@ -36,15 +36,15 @@ export const CourseCard = ({ course, noHover }: Props) => {
         />
       </div>
 
-      <div className="flex flex-grow flex-col p-4">
-        <div className="flex gap-4">
-          <h4 className="mr-auto line-clamp-2 text-lg  font-semibold">{title}</h4>
+      <div className="flex flex-grow flex-col justify-between p-4">
+        <div className="flex items-center gap-4">
+          <h4 className="mr-auto line-clamp-2 text-lg font-semibold">{title}</h4>
           <BookmarkIcon className="h-5 w-5 text-gray-300" />
         </div>
 
-        <p className="mb-10 mt-3 line-clamp-3 flex-grow break-all text-sm text-gray-600">
-          {description}
-        </p>
+        <div className="flex-grow pb-6 pt-3">
+          <p className="line-clamp-3 break-all text-sm text-muted-foreground">{description}</p>
+        </div>
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">

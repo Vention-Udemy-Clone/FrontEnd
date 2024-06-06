@@ -124,7 +124,7 @@ export const CourseForm = ({ form }: Props) => {
                     />
                   </div>
                   <FormControl>
-                    <Textarea disabled={isLoading} rows={3} {...field} />
+                    <Textarea disabled={isLoading} rows={4} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
