@@ -4,6 +4,7 @@ import { ENDPOINTS } from "@/config/endpoints.config";
 import { QUERY_KEYS } from "@/config/react-query.config";
 import request from "@/lib/request";
 import { CourseRequest, CreateCourseResponse } from "@/types/course.types";
+import { toast } from "sonner";
 
 export const useUpdateCourse = () => {
   const queryClient = useQueryClient();
@@ -16,6 +17,7 @@ export const useUpdateCourse = () => {
     },
 
     onSuccess: async (res) => {
+      toast.success("Course updated successfully");
       await queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.query.courses.myCourses] });
       await queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.query.courses.mycourse, res.data.data.id],

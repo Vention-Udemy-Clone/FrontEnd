@@ -15,9 +15,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { useGetMyCourse } from "@/services/courses";
+import { useGenerateContent, useGetMyCourse } from "@/services/courses";
 import { useDeleteModule } from "@/services/modules/useDeleteModule";
+import { Level } from "@/types/course.types";
 import { CourseContent } from "./CourseContent";
 import { LessonContent } from "./LessonContent";
 import { ModuleForm } from "./ModuleForm";
@@ -35,6 +37,7 @@ export const MentorCoursePage = () => {
   const { id } = useParams<{ id: string }>();
   const { data, status } = useGetMyCourse(id);
   const { deleteModule } = useDeleteModule();
+  const { generateContent, status: contentStatus } = useGenerateContent();
 
   const [moduleCreation, setModuleCreation] = useState(false);
   const [moduleEdit, setModuleEdit] = useState("");
@@ -70,13 +73,26 @@ export const MentorCoursePage = () => {
                   {moduleCreation ? (
                     <ModuleForm setModuleCreation={setModuleCreation} />
                   ) : (
-                    <div className="flex">
+                    <div className="flex items-center gap-2">
                       <Button
                         variant="outline"
                         className="w-full text-primary hover:text-primary"
                         onClick={() => setModuleCreation(true)}
                       >
                         Add Module
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="w-full text-primary hover:text-primary"
+                        onClick={() =>
+                          generateContent({
+                            id: id,
+                            title: data?.data.title || "",
+                            level: data?.data.level || ("BEGINNER" as Level),
+                          })
+                        }
+                      >
+                        Generate Content
                       </Button>
                     </div>
                   )}
@@ -154,6 +170,10 @@ export const MentorCoursePage = () => {
                     )
                   )}
                 </Accordion>
+                {contentStatus === "pending" &&
+                  Array.from({ length: 3 }).map((_, idx) => (
+                    <Skeleton key={idx} className="m-1 mb-2 h-10" />
+                  ))}
               </div>
               <LessonContent
                 moduleId={selectedModuleId}

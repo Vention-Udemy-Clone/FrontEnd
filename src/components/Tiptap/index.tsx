@@ -54,14 +54,6 @@ const Tiptap = ({ content, editable, className, placeholder, onChange }: Props) 
     }
   }, [content, editor]);
 
-  // useEffect(() => {
-  //   if (editor) {
-  //     console.log("111", editable);
-
-  //     editor.setOptions({ editable });
-  //   }
-  // }, [editable]);
-
   if (!editor) return null;
 
   return (

@@ -18,13 +18,15 @@ export const courseSchema = z.object({
   level: z.nativeEnum(Level).default(Level.BEGINNER),
   status: z.nativeEnum(Status).default(Status.DRAFT),
   authorId: z.string(),
+  bgImageUrl: z.string().optional(),
 });
 
 export type CourseRequest = z.infer<typeof courseSchema>;
 
 export const generateCourseSchema = z.object({
+  id: z.string(),
   title: z.string().min(3, "Must be at least 3 characters"),
-  authorId: z.string(),
+  level: z.nativeEnum(Level).default(Level.BEGINNER),
 });
 
 export type GenerateCourseRequest = z.infer<typeof generateCourseSchema>;
