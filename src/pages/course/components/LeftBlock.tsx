@@ -109,7 +109,7 @@ export const LeftBlock = ({
                   className="mb-4 flex items-center gap-6  last:[&_.custom-class]:before:content-['']"
                 >
                   <Checkbox
-                    className={`${selectedLesson === lesson.id ? "border-2 border-dashed before:border-primary " : "before:border-gray-400"} custom-class relative h-5 w-5 rounded-full bg-background before:absolute before:left-1/2 before:top-[112%] before:h-10 before:border-collapse before:-translate-x-1/2 before:border-r-2 before:border-dotted  before:content-[''] `}
+                    className={`${selectedLesson === lesson.id ? "border-2 border-dashed before:border-primary " : "before:border-gray-400"} custom-class relative h-5 w-5 rounded-full bg-background before:absolute before:left-1/2 before:top-[112%] before:h-5 before:border-collapse before:-translate-x-1/2 before:border-r-2 before:border-dotted  before:content-[''] ${lessonIndex === module.Lesson.length - 1 ? "before:hidden" : "before:block"}`}
                   />
 
                   <TooltipProvider delayDuration={200}>
