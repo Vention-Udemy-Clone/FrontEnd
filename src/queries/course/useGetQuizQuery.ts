@@ -8,7 +8,7 @@ function useGetQuizQuery(lessonId: string) {
   return useQuery({
     queryKey: [QUERY_KEYS.query.quiz, lessonId],
     queryFn: async () => {
-      const { data } = await request.get<QuizResponse>(ENDPOINTS.lesson.getQuiz(lessonId));
+      const { data } = await request.get<QuizResponse>(ENDPOINTS.quiz.oneQuiz(lessonId));
       return data.data;
     },
     enabled: !!lessonId,

@@ -19,7 +19,23 @@ export type QuizData = {
 };
 
 export type QuizResponse = {
-  data: QuizData[];
+  success: boolean;
+  data: QuizDataResponse;
+};
+
+export type QuizDataResponse = {
+  content: QuizData[];
+  id: string;
+  lessonId: string;
+};
+
+export type QuizCreateRequest = {
+  questions: Question[];
+};
+
+export type Question = {
+  question: string;
+  answer: string;
 };
 
 export type ChatMessage = {
