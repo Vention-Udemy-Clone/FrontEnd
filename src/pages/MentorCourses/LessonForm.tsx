@@ -93,7 +93,7 @@ export const LessonForm = ({
     },
   });
   const [haveQuiz, setHaveQuiz] = useState(false);
-  const { data: lessonQuiz, isPending, isError } = useGetQuizQuery(lessonId || "");
+  const { data: lessonQuiz, isError } = useGetQuizQuery(lessonId || "");
 
   useEffect(() => {
     if (lessonQuiz?.content.length) {

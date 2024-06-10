@@ -62,6 +62,8 @@ export const LessonSummary = ({
     setIsSummaryGenerating(true);
 
     generateSummary(
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       {},
       {
         onSuccess: (data) => {
