@@ -212,8 +212,6 @@ export const LessonForm = ({
     deleteQuiz();
   };
 
-  if (isPending) return <div>Loading...</div>;
-
   return (
     <>
       <Form {...form}>

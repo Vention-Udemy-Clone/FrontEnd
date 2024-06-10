@@ -15,6 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useGenerateContent, useGetMyCourse } from "@/services/courses";
@@ -121,7 +122,8 @@ export const MentorCoursePage = () => {
                         value={String(idx)}
                         className="rounded-md border"
                       >
-                        <div className="flex items-center justify-between p-1">
+                        {/* <div className=" flex items-center justify-between rounded-md"> */}
+                        <AccordionTrigger className="gap-2 rounded-md px-2 py-2 text-start hover:bg-[#edf1f2] hover:no-underline data-[state=open]:bg-[#edf1f2] dark:hover:bg-gray-800 data-[state=open]:dark:bg-gray-800">
                           <DropdownMenu>
                             <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md  hover:bg-accent">
                               <DotsHorizontalIcon />
@@ -135,26 +137,12 @@ export const MentorCoursePage = () => {
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
-                          <AccordionTrigger className="px-2 py-0 text-start hover:no-underline">
-                            {content.title}{" "}
-                            {content.lessons.length !== 0 ? ` [${content.lessons.length}]` : ""}
-                          </AccordionTrigger>
-                        </div>
-                        <AccordionContent className="px-3">
-                          <div className="flex">
-                            <Button
-                              variant="outline"
-                              className="w-full text-primary hover:text-primary"
-                              onClick={() => {
-                                setLessonCreation(true);
-                                setSelectedModuleId(content.id);
-                                setSelectedLessonId("");
-                              }}
-                            >
-                              {lessonCreation ? "Adding Lesson" : "Add Lesson"}
-                            </Button>
-                          </div>
-                          <ul className="mt-1 space-y-2 py-1">
+                          {content.title}{" "}
+                          {content.lessons.length !== 0 ? ` [${content.lessons.length}]` : ""}
+                        </AccordionTrigger>
+                        {/* </div> */}
+                        <AccordionContent className="">
+                          <ul className="mb-3 mt-1 space-y-2 px-3 py-1">
                             {content.lessons.map((lesson) => (
                               <li
                                 key={lesson.id}
@@ -173,6 +161,20 @@ export const MentorCoursePage = () => {
                               </li>
                             ))}
                           </ul>
+                          <Separator className="mb-2" />
+                          <div className="flex px-3">
+                            <Button
+                              variant="outline"
+                              className="w-full text-primary hover:text-primary"
+                              onClick={() => {
+                                setLessonCreation(true);
+                                setSelectedModuleId(content.id);
+                                setSelectedLessonId("");
+                              }}
+                            >
+                              {lessonCreation ? "Adding Lesson" : "Add Lesson"}
+                            </Button>
+                          </div>
                         </AccordionContent>
                       </AccordionItem>
                     )
