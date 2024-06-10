@@ -58,6 +58,13 @@ export const MentorCoursePage = () => {
     }
   }, [data?.data]);
 
+  useEffect(() => {
+    const moduleSkeleton = document.getElementById("module-skeleton");
+    if (moduleSkeleton && contentStatus === "pending") {
+      moduleSkeleton.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [contentStatus]);
+
   return (
     <div className="container">
       <div className="space-y-4">
@@ -84,13 +91,14 @@ export const MentorCoursePage = () => {
                       <Button
                         variant="outline"
                         className="w-full text-primary hover:text-primary"
-                        onClick={() =>
+                        onClick={() => {
                           generateContent({
                             id: id,
                             title: data?.data.title || "",
                             level: data?.data.level || ("BEGINNER" as Level),
-                          })
-                        }
+                          });
+                        }}
+                        disabled={contentStatus === "pending"}
                       >
                         Generate Content
                       </Button>
@@ -170,10 +178,12 @@ export const MentorCoursePage = () => {
                     )
                   )}
                 </Accordion>
-                {contentStatus === "pending" &&
-                  Array.from({ length: 3 }).map((_, idx) => (
-                    <Skeleton key={idx} className="m-1 mb-2 h-10" />
-                  ))}
+                <div id="module-skeleton">
+                  {contentStatus === "pending" &&
+                    Array.from({ length: 3 }).map((_, idx) => (
+                      <Skeleton key={idx} className="m-1 mb-2 h-10" />
+                    ))}
+                </div>
               </div>
               <LessonContent
                 moduleId={selectedModuleId}

@@ -26,6 +26,7 @@ export type LessonResponse = {
 export enum LessonContext {
   "OVERVIEW" = "OVERVIEW",
   "CONTENT" = "CONTENT",
+  "QUIZ" = "QUIZ",
 }
 
 export type GenerateLessonTextsRequest = {

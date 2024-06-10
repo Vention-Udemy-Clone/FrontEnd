@@ -17,7 +17,6 @@ export const ENDPOINTS = {
     root: "/lessons",
     getOneLesson: (lessonId: string) => `/lessons/${lessonId}`,
     generateTexts: "/lessons/generate-texts",
-    getQuiz: (lessonId: string) => `/quiz/${lessonId}`,
     chat: (lessonId: string) => `lessons/${lessonId}/chat`,
   },
   note: {
@@ -34,4 +33,10 @@ export const ENDPOINTS = {
     root: "/modules",
   },
   learningPath: "/learning-path",
+
+  quiz: {
+    root: "/quiz",
+    oneQuiz: (lessonId: string) => `/quiz/${lessonId}`,
+    generateQuiz: (lessonId: string) => `/quiz/generate/${lessonId}`,
+  },
 } as const;
